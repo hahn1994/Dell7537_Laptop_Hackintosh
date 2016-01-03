@@ -1,12 +1,13 @@
 # Dell Inspiron 7537 Hackintosh Guide
-***
+*****
 ## 简介
 本文省略了一些通用的步骤，如果你机型和我一样，可以直接用我提供的文件，反正请认真阅读英文原帖，里面介绍的很详细。
 文中一些补丁和驱动均源自RehabMan、the-darkvoid、vbo等所有为黑果做出贡献的开发者，谢谢你们！
 本文提供的一些修改方法全部源自于论坛，其中本文结构主要参考Dummyone和Nguyenmac的帖子，原帖地址附上:
 - [Dummyone’s Guide](http://www.tonymacx86.com/el-capitan-laptop-guides/177410-guide-dell-inspiron-3x37-5x37-7x37-clover-yosemite-el-capitan.html)
 - [Nguyenmac’s Guide](http://www.tonymacx86.com/mavericks-laptop-support/125911-dell-inspiron-3x37-5x37-7x37-clover-install-guide.html)
-***
+*****
+
 ### 我的硬件配置
 - 电脑型号:Dell Inspiron 7537
 - 硬盘:Seagate 500GB HDD
@@ -18,7 +19,7 @@
 - 无线网卡:Broadcom BCM 94352 HMB
 - 蓝牙:Broadcom 20702A
 - 触摸板:Synaptics Touchpad
-***
+*****
 ### 要求
 1. Dell Inspiron 7537 (3x37/5x37/7x37同样适用)
 2. 原版OS X El Capitan安装镜像
@@ -32,7 +33,7 @@
     - Secure Boot:Disabled
     - Function key behavior:Multimedia key
     - Legacy Rom:Enabled(可选)
-***
+*****
 ## 目前完善进度
 ####已完善
 - [x] 电源管理
@@ -49,7 +50,7 @@
 - [ ] 摄像头驱动
 - [ ] SD卡驱动
 - [ ] Nvidia GT750M 显卡驱动
-***
+*****
 ## 引导安装、完善教程
 ### 安装OSX原版系统
 #### 一、创建硬盘安装镜像
@@ -57,7 +58,7 @@
 - 格式化U盘为MS-DOS(FAT)格式。
 - 将Clover文件夹放入U盘中。
 #### 三、完成OSX初步安装
-***
+*****
 ### 完善安装
 #### 一、将Clover引导安装到系统盘
 - 
@@ -129,7 +130,7 @@
 #### 七、驱动 BCM94352HMB
 - 
 #### 八、修复不能登录AppStore和iCloud的错误
-***
+*****
 ## 可能遇到的问题
 #### 使用打过补丁的AppleHDA
 #### 睡眠唤醒后无声音输出
