@@ -1,14 +1,18 @@
 # Dell Inspiron 7537 Hackintosh Guide
 *****
+
 ## 简介
+
 本文省略了一些通用的步骤，如果你机型和我一样，可以直接用我提供的文件，反正请认真阅读英文原帖，里面介绍的很详细。
 文中一些补丁和驱动均源自RehabMan、the-darkvoid、vbo等所有为黑果做出贡献的开发者，谢谢你们！
 本文提供的一些修改方法全部源自于论坛，其中本文结构主要参考Dummyone和Nguyenmac的帖子，原帖地址附上:
 - [Dummyone’s Guide](http://www.tonymacx86.com/el-capitan-laptop-guides/177410-guide-dell-inspiron-3x37-5x37-7x37-clover-yosemite-el-capitan.html)
 - [Nguyenmac’s Guide](http://www.tonymacx86.com/mavericks-laptop-support/125911-dell-inspiron-3x37-5x37-7x37-clover-install-guide.html)
+
 *****
 
 ### 我的硬件配置
+
 - 电脑型号:Dell Inspiron 7537
 - 硬盘:Seagate 500GB HDD
 - 内存:Samsung DDR3 8G
@@ -19,8 +23,11 @@
 - 无线网卡:Broadcom BCM 94352 HMB
 - 蓝牙:Broadcom 20702A
 - 触摸板:Synaptics Touchpad
+
 *****
+
 ### 要求
+
 1. Dell Inspiron 7537 (3x37/5x37/7x37同样适用)
 2. 原版OS X El Capitan安装镜像
 3. 至少一个U盘
@@ -33,9 +40,13 @@
     - Secure Boot:Disabled
     - Function key behavior:Multimedia key
     - Legacy Rom:Enabled(可选)
+
 *****
+
 ## 目前完善进度
+
 ####已完善
+
 - [x] 电源管理
 - [x] 内建HD4400显卡驱动(包括QE/CI、OpenCL)
 - [x] 内建HDMI输出(画面+声音)
@@ -50,25 +61,44 @@
 - [ ] 摄像头驱动
 - [ ] SD卡驱动
 - [ ] Nvidia GT750M 显卡驱动
+
 *****
+
 ## 引导安装、完善教程
+
 ### 安装OSX原版系统
+
 #### 一、创建硬盘安装镜像
+
 #### 二、创建U盘Clover引导
+
 - 格式化U盘为MS-DOS(FAT)格式。
 - 将Clover文件夹放入U盘中。
+
 #### 三、完成OSX初步安装
+
 *****
+
 ### 完善安装
+
 #### 一、将Clover引导安装到系统盘
-- 
+
+
+
 #### 二、更换Clover配置文件
-- 
+
+
+
 #### 三、有线网卡驱动
-- 
+
+
+
 #### 四、给DSDT/SSDT文件打补丁
+
 	黑苹果的完美取决于你的DSDT文件是否修改得当，所以请认真阅读这个部分
+
 ##### 准备工作
+
 - 去U盘 `CLOVER/ACPI/origin` 文件夹中。
     - 找到以**DSDT**和**SSDT**开头的所有ACPI文件(后缀名为.aml)。
     - 将他们复制到我们桌面一个新建的`DSDT`文件夹。
@@ -80,7 +110,9 @@
 
 	- 等待命令执行完成，我们会得到后缀名为.dsl的反编译文件。
 	- 下载RehabMan提供的[MaciASL](https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads)，用它来编辑我们的dsl文件。
+
 ##### 给DSDT打补丁
+
 - 用**MaciASL**打开**`DSDT.dsl`**，并设置`Preferences>iASL>Compiler options` 为 `ACPI 5.0`。
 - 再转到`Sources`标签下，添加:
 	- Name: `RehabMan DSDT Patches`
@@ -109,7 +141,9 @@
 - 关闭`Patch`页面，然后再次点击`Compile`，如果没有报错，继续点击`Patch`，将`DSDT-Brightness.txt`的内容粘贴进去，点击应用。
 - (这一步 For 10.11)关闭`Patch`页面，然后再次点击`Compile`，如果没有报错，继续点击`Patch`，将`DSDT-USB-Rename.txt`的内容粘贴进去，点击应用。
 - 所有补丁打完后，再次编译`Compile`,没有报错就保存文件，先保存为.dsl文件(方便以后修改)，再另存为`ACPI Machine Language Binary`格式的.aml文件,文件放置在一个新建的文件夹`patches`中，文件命名为`DSDT.aml`。
+
 ##### 给SSDT文件打补丁
+
 - 在`DSDT`文件夹中找到**`SSDT-7.dsl`**,用MaciASL打开它，然后`Patch`以下补丁:
 		Rename GFX0 to IGPU
 		Haswell HD4400/HD4600/HD5000
@@ -120,23 +154,49 @@
 - 点击`Compile`，如果没有报错可以保存为.dsl文件，再另存为名为**`SSDT-2.aml`**，保存到文件夹`patches`中。
 - (如果还有**`SSDT-9.dsl`**，继续此步骤，没有则跳过)选择**`SSDT-9.dsl`**,应用`SSDT9-Patches.txt`,编译没有报错就保存
 
-
-
-
 #### 五、安装其他驱动
-- 
+
+
+
 #### 六、更改睡眠模式
-- 
+
+
+
 #### 七、驱动 BCM94352HMB
-- 
+
+
+
 #### 八、修复不能登录AppStore和iCloud的错误
+
 *****
+
 ## 可能遇到的问题
+
+
+
 #### 使用打过补丁的AppleHDA
+
+
+
 #### 睡眠唤醒后无声音输出
+
+
+
 #### 启动第二阶段花屏
+
+
+
 #### 长时间开机后电脑无法关机或睡眠
+
+
+
 #### 睡眠唤醒后找不到蓝牙设备
+
+
+
 #### iMessages不能登录
+
+
+
 
 
