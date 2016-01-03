@@ -37,13 +37,12 @@
 4. Clover引导
 5. 认真阅读此文档！
 6. 最新版BIOS(我的版本是A13) 并确保设置了以下参数
-    
-		- Disk:AHCI
-    - Intel Rapid Storage:Disabled
-    - UEFI Boot:Enabled
-    - Secure Boot:Disabled
-    - Function key behavior:Multimedia key
-    - Legacy Rom:Enabled(可选)
+	- Disk:AHCI
+	- Intel Rapid Storage:Disabled
+	- UEFI Boot:Enabled
+	- Secure Boot:Disabled
+	- Function key behavior:Multimedia key
+	- Legacy Rom:Enabled(可选)
 
 *****
 
