@@ -194,19 +194,20 @@
 #### 五、安装其他驱动
 
 - 为了让黑苹果更加完美，我们需要安装一些驱动让系统更好的工作，驱动列表如下:
-- ACPIBacklight.kext (可选驱动，如果亮度调节正常可以不装，这个驱动帮助黑苹果更平滑的调节亮度)
-- ACPIBatteryManager.kext (必备，电池状态补丁)
-- AppleHDA.kext (可选，这是 ALC283 的仿冒驱动，需要DSDT或者Clover注入layout-id=3，可自行选择VoodooHDA替代)
-- FakePCIID_XHCIMux.kext (必备，这个驱动将USB2.0的设备关联到EHCI上，将USB3.0的设备关联到XHCI上，在10.11上开启USB3.0)
-- FakePCIID_Intel_HD_Graphics.kext (必备，驱动Intel HD4400,需要FakeID:0x0412)
-- FakePCIID.kext (必备，关联以上两个驱动)
-- FakeSMC.kext (必备，原因不作说明)
-- VoodooPS2Controller.kext (必备，黑苹果键鼠和触控板驱动，支持二指、三指操作)
-- USBXHC_Dell7537.kext (这个和 FakePCIID_XHCIMux.kext 请二选一，两者同时用会导致USB不能识别)
 
-		以上驱动统一安装至 `/Library/Extentions` 下，然后修复权限并重建缓存
-		安装驱动的软件推荐`KCPM Utillity Pro` v5.1
-		安装前需要删除 `/System/Library/Extentions` 目录下的AppleHDA.kext、AppleACPIPS2Nub.kext、ApplePS2Controller.kext，请做好备份并删除！
+	- `ACPIBacklight.kext` (可选驱动，如果亮度调节正常可以不装，这个驱动帮助黑苹果更平滑的调节亮度)
+	- `ACPIBatteryManager.kext` (必备，电池状态补丁)
+	- `AppleHDA.kext` (可选，这是 ALC283 的仿冒驱动，需要DSDT或者Clover注入layout-id=3，可自行选择VoodooHDA替代)
+	- `FakePCIID_XHCIMux.kext` (必备，这个驱动将USB2.0的设备关联到EHCI上，将USB3.0的设备关联到XHCI上，在10.11上开启USB3.0)
+	- `FakePCIID_Intel_HD_Graphics.kext` (必备，驱动Intel HD4400,需要FakeID:0x0412)
+	- `FakePCIID.kext` (必备，关联以上两个驱动)
+	- `FakeSMC.kext` (必备，原因不作说明)
+	- `VoodooPS2Controller.kext` (必备，黑苹果键鼠和触控板驱动，支持二指、三指操作)
+	- `USBXHC_Dell7537.kext` (这个和 FakePCIID_XHCIMux.kext 请二选一，两者同时用会导致USB不能识别)
+
+- 以上驱动统一安装至 `/Library/Extentions` 下，然后修复权限并重建缓存
+- 安装驱动的软件推荐`KCPM Utillity Pro` v5.1
+- 安装前需要删除 `/System/Library/Extentions` 目录下的AppleHDA.kext、AppleACPIPS2Nub.kext、ApplePS2Controller.kext，请做好备份并删除！
 
 #### 六、更改睡眠模式
 
