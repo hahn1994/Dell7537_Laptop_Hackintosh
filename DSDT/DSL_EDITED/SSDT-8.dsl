@@ -865,23 +865,7 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
 
     Scope (\_SB.PCI0.RP05.PEGP)
     {
-        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
-        {
-            If (LEqual (Arg0, ToUUID ("a486d8f8-0bda-471b-a72b-6042a6b5bee0")))
-            {
-                Return (\_SB.PCI0.RP05.PEGP.NVOP (Arg0, Arg1, Arg2, Arg3))
-            }
-
-            If (LEqual (Arg0, ToUUID ("a3132d01-8cda-49ba-a52e-bc9d46df6b81")))
-            {
-                Return (\_SB.PCI0.RP05.PEGP.NVGS (Arg0, Arg1, Arg2, Arg3))
-            }
-
-            If (LEqual (Arg0, ToUUID ("cbeca351-067b-4924-9cbd-b46b00b86f34")))
-            {
-                Return (\_SB.PCI0.RP05.PEGP.NGC6 (Arg0, Arg1, Arg2, Arg3))
-            }
-        }
+        
     }
 }
 

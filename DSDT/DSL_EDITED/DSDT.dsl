@@ -773,7 +773,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                 }
             }
 
-            Method (_P8C, 0, NotSerialized)
+            Method (P8C, 0, NotSerialized)
             {
                 P8XH (Zero, 0x8C)
                 Store (Zero, Local0)
@@ -828,7 +828,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         }
                         Else
                         {
-                            _P8C ()
+                            P8C ()
                         }
                     }
                     Else
@@ -4100,6 +4100,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             SX44 (SX23, Local0)
                             Return (SX23)
                         }
+                        Return (SX23)
                     }
 
                     Method (SX12, 0, NotSerialized)
@@ -4134,7 +4135,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         SX10 ()
                         Store (\_SB.PHS1 (0x1C), Local0)
                         SX12 ()
-                        Return (Local0)
+//                        Return (Local0)
                         \_SB.PCI0.LPCB.EC.PCA1 (0x3C, Zero)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x02), Local0)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x03), Local1)
@@ -5137,6 +5138,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         {
                             NEVT ()
                         }
+                        
                     }
 
                     Method (PSW, 2, NotSerialized)
@@ -5936,7 +5938,9 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
 
     Method (_PTS, 1, Serialized)  // _PTS: Prepare To Sleep
     {
-        If (LNotEqual(Arg0,5)) {
+        External(\_SB.PCI0.PEG0.PEGP._ON, MethodObj)
+If (CondRefOf(\_SB.PCI0.PEG0.PEGP._ON)) { \_SB.PCI0.PEG0.PEGP._ON() }
+If (LNotEqual(Arg0,5)) {
 Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
         Store (Zero, P80D)
         P8XH (Zero, Arg0)
@@ -6229,7 +6233,9 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
         }
 
         \_SB.PHSR (0x03)
-        Return (Package (0x02)
+        External(\_SB.PCI0.PEG0.PEGP._OFF, MethodObj)
+If (CondRefOf(\_SB.PCI0.PEG0.PEGP._OFF)) { \_SB.PCI0.PEG0.PEGP._OFF() }
+Return (Package (0x02)
         {
             Zero, 
             Zero
@@ -6294,6 +6300,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
         Store (Local1, PPL1)
         Store (One, PL1E)
         Store (One, CLP1)
+        Return (Zero)
     }
 
     Method (RPL1, 0, Serialized)
@@ -8124,6 +8131,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
 
                 Return (TEMP)
             }
+            Return (TEMP)
         }
 
         Method (RDGP, 1, Serialized)
@@ -8140,6 +8148,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
 
                 Return (TEMP)
             }
+            Return (TEMP)
         }
 
         Method (WTGP, 2, Serialized)
@@ -9519,6 +9528,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                         Break
                     }
                 }
+                Return (0x0100)
             }
 
             Name (XRST, Zero)
@@ -9646,6 +9656,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 And (PDBM, 0xFFFFFFFFFFFFFFFD, PDBM)
                 Store (Local2, MEMB)
                 Store (Local1, PDBM)
+                Return (Zero)
             }
 
             Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -9712,6 +9723,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 And (PDBM, 0xFFFFFFFFFFFFFFFD, PDBM)
                 Store (Local2, MEMB)
                 Store (Local1, PDBM)
+                Return (Zero)
             }
 
             Method (CUID, 1, Serialized)
@@ -12014,13 +12026,12 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                 
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
@@ -12085,13 +12096,11 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One) 
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
@@ -12137,13 +12146,11 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12245,13 +12252,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (Zero)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12351,13 +12355,11 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12423,13 +12425,11 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12495,13 +12495,11 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (0x0F)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12567,13 +12565,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12603,7 +12598,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y2A._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y2A._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -12645,13 +12640,11 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (0x20)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
+
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12681,7 +12674,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y2B._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y2B._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -12723,13 +12716,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12759,7 +12749,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y2C._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y2C._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -12801,13 +12791,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12837,7 +12824,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2D._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2D._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                     }
 
@@ -12891,13 +12878,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (One)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12927,7 +12911,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2E._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2E._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                         If (LEqual (S0ID, Zero))
                         {
@@ -13029,13 +13013,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                             Return (0x20)
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
+                    Return (Buffer (One)
                         {
                              0x00                                           
                         })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -13065,7 +13046,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2F._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2F._INT, VAL3)  // _INT: Interrupts
                         Store (0x1B, VAL3)
                         If (LEqual (S0ID, Zero))
                         {
@@ -15059,10 +15040,10 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 Return (BUF2)
             }
 
-            Method (_SRS, 1, Serialized)  // _SRS: Set Resource Settings
-            {
-                Return (BUF2)
-            }
+//            Method (_SRS, 1, Serialized)  // _SRS: Set Resource Settings
+//            {
+//                Return (BUF2)
+//            }
         }
     }
 
