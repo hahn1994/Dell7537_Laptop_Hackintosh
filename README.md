@@ -119,10 +119,10 @@
 - 将`iasl`文件放到 `/usr/bin` 目录下。
 
 	- 打开终端，输入下面命令:
-	
-	>		cd ~/Desktop/DSDT
-	>		iasl -da -dl -fe refs.txt *.aml
-
+	```
+	cd ~/Desktop/DSDT
+	iasl -da -dl -fe refs.txt *.aml
+	```
 	- 等待命令执行完成，我们会得到后缀名为.dsl的反编译文件。
 	- 下载RehabMan提供的[MaciASL](https://bitbucket.org/RehabMan/os-x-maciasl-patchmatic/downloads)，用它来编辑我们的dsl文件。
 
@@ -212,9 +212,11 @@
 #### 六、更改睡眠模式
 
 - 打开终端输入
+```
+sudo pmset -a hibernatemode 0
+sudo rm /var/vm/sleepimage
+```
 
->     sudo pmset -a hibernatemode 0
->     sudo rm /var/vm/sleepimage
 
 #### 七、驱动 BCM94352HMB
 
