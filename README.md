@@ -169,6 +169,8 @@
 
 		USB3 _PRW(0x6D)
 
+		Disable/Enable on _WAK/_PTS(DSDT)
+
 
 - 关闭`Patch`页面，然后再次点击`Compile`，如果没有报错，继续点击`Patch`，将`DSDT-Brightness.txt`的内容粘贴进去，点击应用。
 - (这一步 For 10.11)关闭`Patch`页面，然后再次点击`Compile`，如果没有报错，继续点击`Patch`，将`DSDT-USB-Rename.txt`的内容粘贴进去，点击应用。
