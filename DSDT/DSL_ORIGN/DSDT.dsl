@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20151218-64
- * Copyright (c) 2000 - 2015 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of DSDT.aml, Mon Dec 21 19:35:29 2015
+ * Disassembly of DSDT.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
+DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
 {
     /*
      * iASL Warning: There were 17 external control methods found during
@@ -29,7 +29,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
      * unresolved methods. Note: SSDTs can be dynamically loaded at
      * runtime and may or may not be available via the host OS.
      *
-     * If necessary, the -fe option can be used to specify a file containing
+     * In addition, the -fe option can be used to specify a file containing
      * control method external declarations with the associated method
      * argument counts. Each line of the file must be of the form:
      *     External (<method pathname>, MethodObj, <argument count>)
@@ -59,41 +59,41 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
     External (_PR_.CFGD, FieldUnitObj)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, PkgObj)
-    External (_SB_.IAOE.ECTM, UnknownObj)
-    External (_SB_.IAOE.FFSE, UnknownObj)
-    External (_SB_.IAOE.IBT1, UnknownObj)
-    External (_SB_.IAOE.ITMR, UnknownObj)
-    External (_SB_.IAOE.PTSL, UnknownObj)
-    External (_SB_.IAOE.RCTM, UnknownObj)
-    External (_SB_.IAOE.WKRS, UnknownObj)
-    External (_SB_.IFFS.FFSS, UnknownObj)
-    External (_SB_.PCCD, UnknownObj)
-    External (_SB_.PCCD.PENB, UnknownObj)
+    External (_SB_.IAOE.ECTM, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.FFSE, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.IBT1, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.ITMR, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.PTSL, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.RCTM, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.WKRS, UnknownObj) // Warning: unresolved
+    External (_SB_.IFFS.FFSS, UnknownObj) // Warning: unresolved
+    External (_SB_.PCCD, UnknownObj) // Warning: unresolved
+    External (_SB_.PCCD.PENB, UnknownObj) // Warning: unresolved
     External (_SB_.PCI0.B0D3.ABAR, FieldUnitObj)
     External (_SB_.PCI0.B0D3.BARA, IntObj)
     External (_SB_.PCI0.GFX0.DD1F, UnknownObj)
-    External (_SB_.PCI0.GFX0.DD1F._BCM, MethodObj)    // 1 Arguments
-    External (_SB_.PCI0.GFX0.GLID, MethodObj)    // 1 Arguments
-    External (_SB_.PCI0.GFX0.GSCI, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.GFX0.DD1F._BCM, MethodObj)
+    External (_SB_.PCI0.GFX0.GLID, MethodObj)
+    External (_SB_.PCI0.GFX0.GSCI, MethodObj)
     External (_SB_.PCI0.GFX0.GSSE, FieldUnitObj)
-    External (_SB_.PCI0.GFX0.IUEH, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.GFX0.IUEH, MethodObj)
     External (_SB_.PCI0.GFX0.STAT, FieldUnitObj)
     External (_SB_.PCI0.GFX0.TCHE, FieldUnitObj)
     External (_SB_.PCI0.PEG0, UnknownObj)
-    External (_SB_.PCI0.PEG0.HPME, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.PEG0.HPME, MethodObj)
     External (_SB_.PCI0.PEG0.PEGP, UnknownObj)
     External (_SB_.PCI0.PEG1, UnknownObj)
-    External (_SB_.PCI0.PEG1.HPME, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.PEG1.HPME, MethodObj)
     External (_SB_.PCI0.PEG2, UnknownObj)
-    External (_SB_.PCI0.PEG2.HPME, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.PEG2.HPME, MethodObj)
     External (_SB_.PCI0.RP05.PEGP, UnknownObj)
-    External (D1F0, UnknownObj)
-    External (D1F1, UnknownObj)
-    External (D1F2, UnknownObj)
+    External (D1F0, UnknownObj) // Warning: unresolved
+    External (D1F1, UnknownObj) // Warning: unresolved
+    External (D1F2, UnknownObj) // Warning: unresolved
     External (DIDX, FieldUnitObj)
     External (GSMI, FieldUnitObj)
     External (LIDS, FieldUnitObj)
-    External (MDBG, IntObj)
+    External (MDBG, IntObj) // Warning: unresolved
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)

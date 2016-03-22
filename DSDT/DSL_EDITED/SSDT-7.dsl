@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20141107-64 [Jan  2 2015]
- * Copyright (c) 2000 - 2014 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of SSDT-7.aml, Fri Feb 26 15:44:14 2016
+ * Disassembly of SSDT-7.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
+DefinitionBlock ("", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
 {
     /*
      * iASL Warning: There were 16 external control methods found during
@@ -26,9 +26,10 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
      * ACPI tables may be required to properly disassemble the code. This
      * resulting disassembler output file may not compile because the
      * disassembler did not know how many arguments to assign to the
-     * unresolved methods.
+     * unresolved methods. Note: SSDTs can be dynamically loaded at
+     * runtime and may or may not be available via the host OS.
      *
-     * If necessary, the -fe option can be used to specify a file containing
+     * In addition, the -fe option can be used to specify a file containing
      * control method external declarations with the associated method
      * argument counts. Each line of the file must be of the form:
      *     External (<method pathname>, MethodObj, <argument count>)
@@ -48,23 +49,23 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
      * the reference file [refs.txt]
      */
     External (_GPE.MMTB, MethodObj)    // 0 Arguments
-//    External (_SB_.PCI0.LPCB.H_EC.ECRD, MethodObj)    // 1 Arguments
-//    External (_SB_.PCI0.LPCB.H_EC.ECWT, MethodObj)    // 2 Arguments
-//    External (_SB_.PCI0.PEG0.PEGP.SGPO, MethodObj)    // 2 Arguments
+    External (_SB_.PCI0.LPCB.H_EC.ECRD, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.LPCB.H_EC.ECWT, MethodObj)    // 2 Arguments
+    External (_SB_.PCI0.PEG0.PEGP.SGPO, MethodObj)    // 2 Arguments
 
     External (_SB_.PCI0, DeviceObj)
-    External (_SB_.PCI0.AR02, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.AR0A, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.AR0B, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.PR02, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.PR0A, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.PR0B, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.AR02, MethodObj)
+    External (_SB_.PCI0.AR0A, MethodObj)
+    External (_SB_.PCI0.AR0B, MethodObj)
+    External (_SB_.PCI0.PR02, MethodObj)
+    External (_SB_.PCI0.PR0A, MethodObj)
+    External (_SB_.PCI0.PR0B, MethodObj)
     External (_SB_.PEPD, UnknownObj)
-    External (ADBG, MethodObj)    // 1 Arguments
+    External (ADBG, MethodObj)
     External (AS00, IntObj)
     External (DSEN, FieldUnitObj)
-    External (GPRW, MethodObj)    // 2 Arguments
-    External (GUAM, MethodObj)    // 1 Arguments
+    External (GPRW, MethodObj)
+    External (GUAM, MethodObj)
     External (OSYS, FieldUnitObj)
     External (PICM, IntObj)
     External (PNHM, FieldUnitObj)
@@ -276,49 +277,43 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFS)
                                     {
-                                        If (OBFS)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRS)
                                     {
-                                        If (LEqual (Arg1, 0x02))
-                                        {
-                                            If (LTRS)
-                                            {
-                                                Store (And (ShiftRight (SMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (SMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (SNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (SNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
-                                            }
-                                            Else
-                                            {
-                                                Return (Zero)
-                                            }
-                                        }
+                                        Store (And (ShiftRight (SMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (SMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (SNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (SNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -442,49 +437,43 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFS)
                                     {
-                                        If (OBFS)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRS)
                                     {
-                                        If (LEqual (Arg1, 0x02))
-                                        {
-                                            If (LTRS)
-                                            {
-                                                Store (And (ShiftRight (SMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (SMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (SNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (SNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
-                                            }
-                                            Else
-                                            {
-                                                Return (Zero)
-                                            }
-                                        }
+                                        Store (And (ShiftRight (SMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (SMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (SNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (SNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -599,49 +588,43 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFS)
                                     {
-                                        If (OBFS)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRS)
                                     {
-                                        If (LEqual (Arg1, 0x02))
-                                        {
-                                            If (LTRS)
-                                            {
-                                                Store (And (ShiftRight (SMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (SMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (SNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (SNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
-                                            }
-                                            Else
-                                            {
-                                                Return (Zero)
-                                            }
-                                        }
+                                        Store (And (ShiftRight (SMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (SMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (SNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (SNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -680,8 +663,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
 
             Method (_INI, 0, NotSerialized)  // _INI: Initialize
             {
-                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (
-                    ABAR, 0xFFFFC000), Zero)))
+                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (ABAR, 0xFFFFC000), Zero)))
                 {
                     Store (ABAR, BARA)
                 }
@@ -704,8 +686,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
 
             Method (ASTR, 0, Serialized)
             {
-                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (
-                    ABAR, 0xFFFFC000), Zero)))
+                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (ABAR, 0xFFFFC000), Zero)))
                 {
                     And (ABAR, 0xFFFFFFF0, BBAR)
                     Add (BBAR, 0x1000, BBAR)
@@ -736,8 +717,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                     CDEC,   32
                 }
 
-                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (
-                    ABAR, 0xFFFFC000), Zero)))
+                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (ABAR, 0xFFFFC000), Zero)))
                 {
                     If (LNotEqual (CDEC, Zero))
                     {
@@ -787,8 +767,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
 
             Method (ARST, 0, Serialized)
             {
-                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (
-                    ABAR, 0xFFFFC000), Zero)))
+                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (ABAR, 0xFFFFC000), Zero)))
                 {
                     And (ABAR, 0xFFFFFFF0, BBAR)
                     OperationRegion (IPCV, SystemMemory, BBAR, 0xBF)
@@ -817,8 +796,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
             Method (AINI, 0, Serialized)
             {
                 Name (CONT, 0x03E8)
-                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (
-                    ABAR, 0xFFFFC000), Zero)))
+                If (LAnd (LNotEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (ABAR, 0xFFFFC000), Zero)))
                 {
                     And (ABAR, 0xFFFFFFF0, BBAR)
                     OperationRegion (IPCV, SystemMemory, BBAR, 0x70)
@@ -867,8 +845,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
             {
                 If (Arg0)
                 {
-                    If (LOr (LEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LEqual (And (ABAR, 0xFFFFC000
-                        ), Zero)))
+                    If (LOr (LEqual (And (ABAR, 0xFFFFC004), 0xFFFFC004), LEqual (And (ABAR, 0xFFFFC000), Zero)))
                     {
                         If (LNotEqual (BARA, 0x80000000))
                         {
@@ -879,29 +856,18 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                             Store (One, MODB)
                         }
                     }
-                    Else
+                    ElseIf (LNotEqual (And (ACMD, 0x06), 0x06))
                     {
-                        If (LNotEqual (And (ACMD, 0x06), 0x06))
-                        {
-                            Store (ACMD, TCMD)
-                            Store (0x06, ACMD)
-                            Store (One, MODC)
-                        }
+                        Store (ACMD, TCMD)
+                        Store (0x06, ACMD)
+                        Store (One, MODC)
                     }
                 }
-                Else
+                ElseIf (MODB)
                 {
-                    If (MODB)
+                    If (LEqual (ABAR, BARA))
                     {
-                        If (LEqual (ABAR, BARA))
-                        {
-                            Store (TBAR, ABAR)
-                            Store (TCMD, ACMD)
-                        }
-                    }
-
-                    If (MODC)
-                    {
+                        Store (TBAR, ABAR)
                         Store (TCMD, ACMD)
                     }
                 }
@@ -2835,8 +2801,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                         Or (PARM, ShiftLeft (GMFN, One), PARM)
                         Or (PARM, 0x1800, PARM)
                         Or (PARM, ShiftLeft (IDMS, 0x11), PARM)
-                        Or (ShiftLeft (DerefOf (Index (DerefOf (Index (CDCT, HVCO)), CDVL)), 0x15
-                            ), PARM, PARM)
+                        Or (ShiftLeft (DerefOf (Index (DerefOf (Index (CDCT, HVCO)), CDVL)), 0x15), PARM, PARM)
                         Store (One, GESF)
                         Return (SUCC)
                     }
@@ -3225,16 +3190,13 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                             {
                                 Store (0x06, PFIT)
                             }
+                            ElseIf (And (Local1, 0x08))
+                            {
+                                Store (0x08, PFIT)
+                            }
                             Else
                             {
-                                If (And (Local1, 0x08))
-                                {
-                                    Store (0x08, PFIT)
-                                }
-                                Else
-                                {
-                                    Store (One, PFIT)
-                                }
+                                Store (One, PFIT)
                             }
                         }
 
@@ -3244,16 +3206,13 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                             {
                                 Store (0x08, PFIT)
                             }
+                            ElseIf (And (Local1, One))
+                            {
+                                Store (One, PFIT)
+                            }
                             Else
                             {
-                                If (And (Local1, One))
-                                {
-                                    Store (One, PFIT)
-                                }
-                                Else
-                                {
-                                    Store (0x06, PFIT)
-                                }
+                                Store (0x06, PFIT)
                             }
                         }
 
@@ -3263,16 +3222,13 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                             {
                                 Store (One, PFIT)
                             }
+                            ElseIf (And (Local1, 0x06))
+                            {
+                                Store (0x06, PFIT)
+                            }
                             Else
                             {
-                                If (And (Local1, 0x06))
-                                {
-                                    Store (0x06, PFIT)
-                                }
-                                Else
-                                {
-                                    Store (0x08, PFIT)
-                                }
+                                Store (0x08, PFIT)
                             }
                         }
                     }
@@ -3284,26 +3240,20 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                     Or (PFIT, 0x80000000, PFIT)
                     Store (0x04, ASLC)
                 }
+                ElseIf (LEqual (Arg0, One))
+                {
+                    Store (Divide (Multiply (Arg1, 0xFF), 0x64, ), BCLP)
+                    Or (BCLP, 0x80000000, BCLP)
+                    Store (0x02, ASLC)
+                }
+                ElseIf (LEqual (Arg0, Zero))
+                {
+                    Store (Arg1, ALSI)
+                    Store (One, ASLC)
+                }
                 Else
                 {
-                    If (LEqual (Arg0, One))
-                    {
-                        Store (Divide (Multiply (Arg1, 0xFF), 0x64, ), BCLP)
-                        Or (BCLP, 0x80000000, BCLP)
-                        Store (0x02, ASLC)
-                    }
-                    Else
-                    {
-                        If (LEqual (Arg0, Zero))
-                        {
-                            Store (Arg1, ALSI)
-                            Store (One, ASLC)
-                        }
-                        Else
-                        {
-                            Return (One)
-                        }
-                    }
+                    Return (One)
                 }
 
                 Store (One, ASLE)
@@ -3526,6 +3476,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
                     2531, 2612, 2694, 2777,
                 })
             }
+            
         }
     }
 }

@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20151218-64
- * Copyright (c) 2000 - 2015 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of SSDT-2.aml, Mon Dec 21 19:35:29 2015
+ * Disassembly of SSDT-2.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-2.aml", "SSDT", 1, "DELL  ", "Cpu0Ist", 0x00003000)
+DefinitionBlock ("", "SSDT", 1, "DELL  ", "Cpu0Ist", 0x00003000)
 {
 
     /*
@@ -65,26 +65,6 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 1, "DELL  ", "Cpu0Ist", 0x00003000)
                     }
                 })
             }
-            Return (Package (0x02)
-                {
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW, 
-                            0x00,               // Bit Width
-                            0x00,               // Bit Offset
-                            0x0000000000000000, // Address
-                            ,)
-                    }, 
-
-                    ResourceTemplate ()
-                    {
-                        Register (FFixedHW, 
-                            0x00,               // Bit Width
-                            0x00,               // Bit Offset
-                            0x0000000000000000, // Address
-                            ,)
-                    }
-                })
         }
 
         Name (_PSS, Package (0x0C)  // _PSS: Performance Supported States
@@ -210,6 +190,37 @@ DefinitionBlock ("SSDT-2.aml", "SSDT", 1, "DELL  ", "Cpu0Ist", 0x00003000)
             }
         })
         
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
         Name (PSDF, Zero)
         Method (_PSD, 0, NotSerialized)  // _PSD: Power State Dependencies
         {

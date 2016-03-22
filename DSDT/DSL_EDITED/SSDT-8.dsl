@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20141107-64 [Jan  2 2015]
- * Copyright (c) 2000 - 2014 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of SSDT-8.aml, Fri Feb 26 15:44:14 2016
+ * Disassembly of SSDT-8.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
+DefinitionBlock ("", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
 {
 
     /*
@@ -26,20 +26,20 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
      * the reference file [refs.txt]
      */
     External (_GPE.MMTB, MethodObj)    // 0 Arguments
-//    External (_SB_.PCI0.LPCB.H_EC.ECRD, MethodObj)    // 1 Arguments
-//    External (_SB_.PCI0.LPCB.H_EC.ECWT, MethodObj)    // 2 Arguments
-//    External (_SB_.PCI0.PEG0.PEGP.SGPO, MethodObj)    // 2 Arguments
+    External (_SB_.PCI0.LPCB.H_EC.ECRD, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.LPCB.H_EC.ECWT, MethodObj)    // 2 Arguments
+    External (_SB_.PCI0.PEG0.PEGP.SGPO, MethodObj)    // 2 Arguments
 
     External (_PR_.CPU0, ProcessorObj)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, PkgObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.IGPU, DeviceObj)
-    External (_SB_.PCI0.LPCB.EC__.ECRB, MethodObj)    // 1 Arguments
-    External (_SB_.PCI0.LPCB.EC__.PCA5, MethodObj)    // 3 Arguments
+    External (_SB_.PCI0.LPCB.EC__.ECRB, MethodObj)
+    External (_SB_.PCI0.LPCB.EC__.PCA5, MethodObj)
     External (_SB_.PCI0.RP05, DeviceObj)
     External (DGC6, FieldUnitObj)
-    External (P8XH, MethodObj)    // 2 Arguments
+    External (P8XH, MethodObj)
 
     Scope (\_SB.PCI0.RP05)
     {
@@ -240,29 +240,20 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
             {
                 Store (RBF1, ROM1)
             }
-            Else
+            ElseIf (LLess (Local0, 0x00010000))
             {
-                If (LLess (Local0, 0x00010000))
-                {
-                    Subtract (Local0, 0x8000, Local0)
-                    Store (RBF2, ROM1)
-                }
-                Else
-                {
-                    If (LLess (Local0, 0x00018000))
-                    {
-                        Subtract (Local0, 0x00010000, Local0)
-                        Store (RBF3, ROM1)
-                    }
-                    Else
-                    {
-                        If (LLess (Local0, 0x00020000))
-                        {
-                            Subtract (Local0, 0x00018000, Local0)
-                            Store (RBF4, ROM1)
-                        }
-                    }
-                }
+                Subtract (Local0, 0x8000, Local0)
+                Store (RBF2, ROM1)
+            }
+            ElseIf (LLess (Local0, 0x00018000))
+            {
+                Subtract (Local0, 0x00010000, Local0)
+                Store (RBF3, ROM1)
+            }
+            ElseIf (LLess (Local0, 0x00020000))
+            {
+                Subtract (Local0, 0x00018000, Local0)
+                Store (RBF4, ROM1)
             }
 
             Multiply (Local0, 0x08, Local2)
@@ -352,57 +343,51 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
                     Or (DerefOf (Index (Local0, Local1)), Local2, Index (Local0, Local1))
                     Return (Local0)
                 }
-                Else
+                ElseIf (LEqual (_T_0, 0x1A))
                 {
-                    If (LEqual (_T_0, 0x1A))
+                    CreateField (Arg3, 0x18, 0x02, OPCE)
+                    CreateField (Arg3, Zero, One, FLCH)
+                    If (ToInteger (FLCH))
                     {
-                        CreateField (Arg3, 0x18, 0x02, OPCE)
-                        CreateField (Arg3, Zero, One, FLCH)
-                        If (ToInteger (FLCH))
-                        {
-                            Store (OPCE, OMPR)
-                        }
-
-                        Store (Buffer (0x04)
-                            {
-                                 0x00, 0x00, 0x00, 0x00                         
-                            }, Local0)
-                        CreateField (Local0, Zero, One, OPEN)
-                        CreateField (Local0, 0x03, 0x02, CGCS)
-                        CreateField (Local0, 0x06, One, SHPC)
-                        CreateField (Local0, 0x18, 0x03, DGPC)
-                        CreateField (Local0, 0x1B, 0x02, HDAC)
-                        Store (One, OPEN)
-                        Store (One, SHPC)
-                        Store (0x02, HDAC)
-                        Store (One, DGPC)
-                        If (\_SB.PCI0.RP05.PEGP._STA ())
-                        {
-                            Store (0x03, CGCS)
-                        }
-
-                        Return (Local0)
+                        Store (OPCE, OMPR)
                     }
-                    Else
-                    {
-                        If (LEqual (_T_0, 0x1B))
-                        {
-                            Store (Arg3, Local0)
-                            CreateField (Local0, Zero, One, OPFL)
-                            CreateField (Local0, One, One, OPVL)
-                            If (ToInteger (OPVL))
-                            {
-                                Store (Zero, \_SB.PCI0.OPTF)
-                                If (ToInteger (OPFL))
-                                {
-                                    Store (One, \_SB.PCI0.OPTF)
-                                }
-                            }
 
-                            Store (\_SB.PCI0.OPTF, Local0)
-                            Return (Local0)
+                    Store (Buffer (0x04)
+                        {
+                             0x00, 0x00, 0x00, 0x00                         
+                        }, Local0)
+                    CreateField (Local0, Zero, One, OPEN)
+                    CreateField (Local0, 0x03, 0x02, CGCS)
+                    CreateField (Local0, 0x06, One, SHPC)
+                    CreateField (Local0, 0x18, 0x03, DGPC)
+                    CreateField (Local0, 0x1B, 0x02, HDAC)
+                    Store (One, OPEN)
+                    Store (One, SHPC)
+                    Store (0x02, HDAC)
+                    Store (One, DGPC)
+                    If (\_SB.PCI0.RP05.PEGP._STA ())
+                    {
+                        Store (0x03, CGCS)
+                    }
+
+                    Return (Local0)
+                }
+                ElseIf (LEqual (_T_0, 0x1B))
+                {
+                    Store (Arg3, Local0)
+                    CreateField (Local0, Zero, One, OPFL)
+                    CreateField (Local0, One, One, OPVL)
+                    If (ToInteger (OPVL))
+                    {
+                        Store (Zero, \_SB.PCI0.OPTF)
+                        If (ToInteger (OPFL))
+                        {
+                            Store (One, \_SB.PCI0.OPTF)
                         }
                     }
+
+                    Store (\_SB.PCI0.OPTF, Local0)
+                    Return (Local0)
                 }
 
                 Break
@@ -449,128 +434,107 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
                      0x01, 0x00, 0x00, 0x00, 0x0F, 0x04, 0x00, 0x00 
                 })
             }
-            Else
+            ElseIf (LEqual (SUBF, 0x2A))
             {
-                If (LEqual (SUBF, 0x2A))
+                Store ("GPS Function 2AH", Debug)
+                CreateByteField (Arg3, Zero, PSH0)
+                CreateByteField (Arg3, One, PSH1)
+                CreateBitField (Arg3, 0x08, GPUT)
+                CreateBitField (Arg3, 0x09, CPUT)
+                CreateBitField (Arg3, 0x0A, FANS)
+                CreateBitField (Arg3, 0x0B, SKIN)
+                CreateBitField (Arg3, 0x0C, ENGR)
+                CreateBitField (Arg3, 0x0D, SEN1)
+                CreateBitField (Arg3, 0x0E, SEN2)
+                While (One)
                 {
-                    Store ("GPS Function 2AH", Debug)
-                    CreateByteField (Arg3, Zero, PSH0)
-                    CreateByteField (Arg3, One, PSH1)
-                    CreateBitField (Arg3, 0x08, GPUT)
-                    CreateBitField (Arg3, 0x09, CPUT)
-                    CreateBitField (Arg3, 0x0A, FANS)
-                    CreateBitField (Arg3, 0x0B, SKIN)
-                    CreateBitField (Arg3, 0x0C, ENGR)
-                    CreateBitField (Arg3, 0x0D, SEN1)
-                    CreateBitField (Arg3, 0x0E, SEN2)
-                    While (One)
+                    Store (PSH0, _T_0)
+                    If (LEqual (_T_0, Zero))
                     {
-                        Store (PSH0, _T_0)
-                        If (LEqual (_T_0, Zero))
+                        If (CPUT)
                         {
-                            If (CPUT)
-                            {
-                                Store (0x0200, RETN)
-                                Or (RETN, PSH0, RETN)
-                                Store (0x40, PDTS)
-                            }
-
-                            Return (GPSP)
-                        }
-                        Else
-                        {
-                            If (LEqual (_T_0, One))
-                            {
-                                If (GPUT)
-                                {
-                                    Or (RETN, 0x0100, RETN)
-                                }
-
-                                If (CPUT)
-                                {
-                                    Or (RETN, 0x0200, RETN)
-                                    Store (0x01F4, PDTS)
-                                }
-
-                                Return (GPSP)
-                            }
-                            Else
-                            {
-                                If (LEqual (_T_0, 0x02))
-                                {
-                                    Store (0x0102, RETN)
-                                    Store (Zero, VRV1)
-                                    Store (0x4B, TGPU)
-                                    Store (Zero, PDTS)
-                                    Store (Zero, SFAN)
-                                    Store (Zero, CPUE)
-                                    Store (Zero, SKNT)
-                                    Store (Zero, TMP1)
-                                    Store (Zero, TMP2)
-                                    Return (GPSP)
-                                }
-                            }
+                            Store (0x0200, RETN)
+                            Or (RETN, PSH0, RETN)
+                            Store (0x40, PDTS)
                         }
 
-                        Break
+                        Return (GPSP)
                     }
-                }
-                Else
-                {
-                    If (LEqual (SUBF, 0x20))
+                    ElseIf (LEqual (_T_0, One))
                     {
-                        Store ("GPS fun 20", Debug)
-                        Name (RET1, Zero)
-                        CreateBitField (Arg3, 0x18, NRIT)
-                        CreateBitField (Arg3, 0x19, NRIS)
-                        If (NRIS)
+                        If (GPUT)
                         {
-                            If (NRIT)
-                            {
-                                Or (RET1, 0x01000000, RET1)
-                            }
-                            Else
-                            {
-                                And (RET1, 0xFEFFFFFF, RET1)
-                            }
+                            Or (RETN, 0x0100, RETN)
                         }
 
-                        Or (RET1, 0x40000000, RET1)
-                        Return (RET1)
+                        If (CPUT)
+                        {
+                            Or (RETN, 0x0200, RETN)
+                            Store (0x01F4, PDTS)
+                        }
+
+                        Return (GPSP)
+                    }
+                    ElseIf (LEqual (_T_0, 0x02))
+                    {
+                        Store (0x0102, RETN)
+                        Store (Zero, VRV1)
+                        Store (0x4B, TGPU)
+                        Store (Zero, PDTS)
+                        Store (Zero, SFAN)
+                        Store (Zero, CPUE)
+                        Store (Zero, SKNT)
+                        Store (Zero, TMP1)
+                        Store (Zero, TMP2)
+                        Return (GPSP)
+                    }
+
+                    Break
+                }
+            }
+            ElseIf (LEqual (SUBF, 0x20))
+            {
+                Store ("GPS fun 20", Debug)
+                Name (RET1, Zero)
+                CreateBitField (Arg3, 0x18, NRIT)
+                CreateBitField (Arg3, 0x19, NRIS)
+                If (NRIS)
+                {
+                    If (NRIT)
+                    {
+                        Or (RET1, 0x01000000, RET1)
                     }
                     Else
                     {
-                        If (LEqual (SUBF, 0x21))
-                        {
-                            Store ("GPS fun 21", Debug)
-                            Return (\_PR.CPU0._PSS)
-                        }
-                        Else
-                        {
-                            If (LEqual (SUBF, 0x22))
-                            {
-                                Store ("GPS fun 22", Debug)
-                                CreateDWordField (Arg3, Zero, PCAP)
-                                Store (PCAP, \_PR.CPU0._PPC)
-                                Notify (\_PR.CPU0, 0x80)
-                                Store (PCAP, PSAP)
-                                Return (PCAP)
-                            }
-                            Else
-                            {
-                                If (LEqual (SUBF, 0x23))
-                                {
-                                    Store ("GPS fun 23", Debug)
-                                    Return (PSAP)
-                                }
-                                Else
-                                {
-                                    Return (0x80000002)
-                                }
-                            }
-                        }
+                        And (RET1, 0xFEFFFFFF, RET1)
                     }
                 }
+
+                Or (RET1, 0x40000000, RET1)
+                Return (RET1)
+            }
+            ElseIf (LEqual (SUBF, 0x21))
+            {
+                Store ("GPS fun 21", Debug)
+                Return (\_PR.CPU0._PSS)
+            }
+            ElseIf (LEqual (SUBF, 0x22))
+            {
+                Store ("GPS fun 22", Debug)
+                CreateDWordField (Arg3, Zero, PCAP)
+                Store (PCAP, \_PR.CPU0._PPC)
+                Notify (\_PR.CPU0, 0x80)
+                Store (PCAP, PSAP)
+                Return (PCAP)
+            }
+            ElseIf (LEqual (SUBF, 0x23))
+            {
+                Store ("GPS fun 23", Debug)
+                Return (PSAP)
+            }
+            Else
+            {
+                Return (0x80000002)
             }
 
             Return (Zero)
@@ -719,68 +683,56 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
                         Store (One, PLST)
                         Break
                     }
-                    Else
+                    ElseIf (LEqual (_T_0, 0x02))
                     {
-                        If (LEqual (_T_0, 0x02))
+                        Store (Arg3, TGPC)
+                        GC6I ()
+                        If (LEqual (ToInteger (PLPC), Zero))
                         {
-                            Store (Arg3, TGPC)
-                            GC6I ()
-                            If (LEqual (ToInteger (PLPC), Zero))
-                            {
-                                Store (Zero, PLST)
-                            }
+                            Store (Zero, PLST)
+                        }
 
-                            Break
+                        Break
+                    }
+                    ElseIf (LEqual (_T_0, 0x03))
+                    {
+                        Store (Arg3, TGPC)
+                        GC6O ()
+                        If (LEqual (ToInteger (PLPC), Zero))
+                        {
+                            Store (Zero, PLST)
+                        }
+
+                        Break
+                    }
+                    ElseIf (LEqual (_T_0, 0x04))
+                    {
+                        Store (Arg3, TGPC)
+                        GC6O ()
+                        If (LEqual (ToInteger (PLPC), Zero))
+                        {
+                            Store (Zero, PLST)
+                        }
+
+                        Break
+                    }
+                    ElseIf (LEqual (_T_0, Zero))
+                    {
+                        Store (CURS (), GUPS)
+                        If (LEqual (ToInteger (GUPS), One))
+                        {
+                            Store (One, GPGS)
                         }
                         Else
                         {
-                            If (LEqual (_T_0, 0x03))
-                            {
-                                Store (Arg3, TGPC)
-                                GC6O ()
-                                If (LEqual (ToInteger (PLPC), Zero))
-                                {
-                                    Store (Zero, PLST)
-                                }
-
-                                Break
-                            }
-                            Else
-                            {
-                                If (LEqual (_T_0, 0x04))
-                                {
-                                    Store (Arg3, TGPC)
-                                    GC6O ()
-                                    If (LEqual (ToInteger (PLPC), Zero))
-                                    {
-                                        Store (Zero, PLST)
-                                    }
-
-                                    Break
-                                }
-                                Else
-                                {
-                                    If (LEqual (_T_0, Zero))
-                                    {
-                                        Store (CURS (), GUPS)
-                                        If (LEqual (ToInteger (GUPS), One))
-                                        {
-                                            Store (One, GPGS)
-                                        }
-                                        Else
-                                        {
-                                            Store (Zero, GPGS)
-                                        }
-
-                                        Break
-                                    }
-                                    Else
-                                    {
-                                        Break
-                                    }
-                                }
-                            }
+                            Store (Zero, GPGS)
                         }
+
+                        Break
+                    }
+                    Else
+                    {
+                        Break
                     }
 
                     Break
@@ -850,8 +802,7 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
             Store (Zero, Local0)
             While (LLess (Local0, Local1))
             {
-                If (LNotEqual (DerefOf (Index (Arg0, Local0)), DerefOf (Index (Arg1, Local0
-                    ))))
+                If (LNotEqual (DerefOf (Index (Arg0, Local0)), DerefOf (Index (Arg1, Local0))))
                 {
                     Return (Zero)
                 }
@@ -865,7 +816,23 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
 
     Scope (\_SB.PCI0.RP05.PEGP)
     {
-        
+        Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+        {
+            If (LEqual (Arg0, ToUUID ("a486d8f8-0bda-471b-a72b-6042a6b5bee0")))
+            {
+                Return (\_SB.PCI0.RP05.PEGP.NVOP (Arg0, Arg1, Arg2, Arg3))
+            }
+
+            If (LEqual (Arg0, ToUUID ("a3132d01-8cda-49ba-a52e-bc9d46df6b81")))
+            {
+                Return (\_SB.PCI0.RP05.PEGP.NVGS (Arg0, Arg1, Arg2, Arg3))
+            }
+
+            If (LEqual (Arg0, ToUUID ("cbeca351-067b-4924-9cbd-b46b00b86f34")))
+            {
+                Return (\_SB.PCI0.RP05.PEGP.NGC6 (Arg0, Arg1, Arg2, Arg3))
+            }
+        }
     }
 }
 

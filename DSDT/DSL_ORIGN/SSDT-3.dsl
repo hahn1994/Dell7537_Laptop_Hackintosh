@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20151218-64
- * Copyright (c) 2000 - 2015 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of SSDT-3.aml, Mon Dec 21 19:35:29 2015
+ * Disassembly of SSDT-3.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-3.aml", "SSDT", 1, "DELL  ", "CpuPm", 0x00003000)
+DefinitionBlock ("", "SSDT", 1, "DELL  ", "CpuPm", 0x00003000)
 {
 
     /*

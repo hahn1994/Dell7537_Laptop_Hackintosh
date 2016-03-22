@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20151218-64
- * Copyright (c) 2000 - 2015 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of SSDT-7.aml, Mon Dec 21 19:35:29 2015
+ * Disassembly of SSDT-7.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
+DefinitionBlock ("", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
 {
     /*
      * iASL Warning: There were 16 external control methods found during
@@ -29,7 +29,7 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
      * unresolved methods. Note: SSDTs can be dynamically loaded at
      * runtime and may or may not be available via the host OS.
      *
-     * If necessary, the -fe option can be used to specify a file containing
+     * In addition, the -fe option can be used to specify a file containing
      * control method external declarations with the associated method
      * argument counts. Each line of the file must be of the form:
      *     External (<method pathname>, MethodObj, <argument count>)
@@ -54,18 +54,18 @@ DefinitionBlock ("SSDT-7.aml", "SSDT", 1, "DELL  ", "SaSsdt ", 0x00003000)
     External (_SB_.PCI0.PEG0.PEGP.SGPO, MethodObj)    // 2 Arguments
 
     External (_SB_.PCI0, DeviceObj)
-    External (_SB_.PCI0.AR02, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.AR0A, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.AR0B, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.PR02, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.PR0A, MethodObj)    // 0 Arguments
-    External (_SB_.PCI0.PR0B, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.AR02, MethodObj)
+    External (_SB_.PCI0.AR0A, MethodObj)
+    External (_SB_.PCI0.AR0B, MethodObj)
+    External (_SB_.PCI0.PR02, MethodObj)
+    External (_SB_.PCI0.PR0A, MethodObj)
+    External (_SB_.PCI0.PR0B, MethodObj)
     External (_SB_.PEPD, UnknownObj)
-    External (ADBG, MethodObj)    // 1 Arguments
+    External (ADBG, MethodObj)
     External (AS00, IntObj)
     External (DSEN, FieldUnitObj)
-    External (GPRW, MethodObj)    // 2 Arguments
-    External (GUAM, MethodObj)    // 1 Arguments
+    External (GPRW, MethodObj)
+    External (GUAM, MethodObj)
     External (OSYS, FieldUnitObj)
     External (PICM, IntObj)
     External (PNHM, FieldUnitObj)

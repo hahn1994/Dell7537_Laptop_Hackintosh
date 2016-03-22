@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20151218-64
- * Copyright (c) 2000 - 2015 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of SSDT-8.aml, Mon Dec 21 19:35:29 2015
+ * Disassembly of SSDT-8.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "SSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
+DefinitionBlock ("", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
 {
 
     /*
@@ -35,11 +35,11 @@ DefinitionBlock ("SSDT-8.aml", "SSDT", 1, "NvORef", "NvUltTbl", 0x00001000)
     External (_PR_.CPU0._PSS, PkgObj)
     External (_SB_.PCI0, DeviceObj)
     External (_SB_.PCI0.GFX0, DeviceObj)
-    External (_SB_.PCI0.LPCB.EC__.ECRB, MethodObj)    // 1 Arguments
-    External (_SB_.PCI0.LPCB.EC__.PCA5, MethodObj)    // 3 Arguments
+    External (_SB_.PCI0.LPCB.EC__.ECRB, MethodObj)
+    External (_SB_.PCI0.LPCB.EC__.PCA5, MethodObj)
     External (_SB_.PCI0.RP05, DeviceObj)
     External (DGC6, FieldUnitObj)
-    External (P8XH, MethodObj)    // 2 Arguments
+    External (P8XH, MethodObj)
 
     Scope (\_SB.PCI0.RP05)
     {

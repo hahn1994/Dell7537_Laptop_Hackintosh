@@ -1,11 +1,11 @@
 /*
  * Intel ACPI Component Architecture
- * AML/ASL+ Disassembler version 20141107-64 [Jan  2 2015]
- * Copyright (c) 2000 - 2014 Intel Corporation
+ * AML/ASL+ Disassembler version 20160313-64(RM)
+ * Copyright (c) 2000 - 2016 Intel Corporation
  * 
  * Disassembling to non-symbolic legacy ASL operators
  *
- * Disassembly of DSDT.aml, Fri Feb 26 15:44:13 2016
+ * Disassembly of DSDT.aml, Mon Mar 21 23:14:11 2016
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20120711 (538052369)
  */
-DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
+DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
 {
     /*
      * iASL Warning: There were 17 external control methods found during
@@ -26,9 +26,10 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
      * ACPI tables may be required to properly disassemble the code. This
      * resulting disassembler output file may not compile because the
      * disassembler did not know how many arguments to assign to the
-     * unresolved methods.
+     * unresolved methods. Note: SSDTs can be dynamically loaded at
+     * runtime and may or may not be available via the host OS.
      *
-     * If necessary, the -fe option can be used to specify a file containing
+     * In addition, the -fe option can be used to specify a file containing
      * control method external declarations with the associated method
      * argument counts. Each line of the file must be of the form:
      *     External (<method pathname>, MethodObj, <argument count>)
@@ -58,41 +59,41 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
     External (_PR_.CFGD, FieldUnitObj)
     External (_PR_.CPU0._PPC, IntObj)
     External (_PR_.CPU0._PSS, PkgObj)
-    External (_SB_.IAOE.ECTM, UnknownObj)
-    External (_SB_.IAOE.FFSE, UnknownObj)
-    External (_SB_.IAOE.IBT1, UnknownObj)
-    External (_SB_.IAOE.ITMR, UnknownObj)
-    External (_SB_.IAOE.PTSL, UnknownObj)
-    External (_SB_.IAOE.RCTM, UnknownObj)
-    External (_SB_.IAOE.WKRS, UnknownObj)
-    External (_SB_.IFFS.FFSS, UnknownObj)
-    External (_SB_.PCCD, UnknownObj)
-    External (_SB_.PCCD.PENB, UnknownObj)
+    External (_SB_.IAOE.ECTM, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.FFSE, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.IBT1, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.ITMR, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.PTSL, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.RCTM, UnknownObj) // Warning: unresolved
+    External (_SB_.IAOE.WKRS, UnknownObj) // Warning: unresolved
+    External (_SB_.IFFS.FFSS, UnknownObj) // Warning: unresolved
+    External (_SB_.PCCD, UnknownObj) // Warning: unresolved
+    External (_SB_.PCCD.PENB, UnknownObj) // Warning: unresolved
     External (_SB_.PCI0.HDAU.ABAR, FieldUnitObj)
     External (_SB_.PCI0.HDAU.BARA, IntObj)
     External (_SB_.PCI0.IGPU.DD1F, UnknownObj)
-    External (_SB_.PCI0.IGPU.DD1F._BCM, MethodObj)    // 1 Arguments
-    External (_SB_.PCI0.IGPU.GLID, MethodObj)    // 1 Arguments
-    External (_SB_.PCI0.IGPU.GSCI, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.IGPU.DD1F._BCM, MethodObj)
+    External (_SB_.PCI0.IGPU.GLID, MethodObj)
+    External (_SB_.PCI0.IGPU.GSCI, MethodObj)
     External (_SB_.PCI0.IGPU.GSSE, FieldUnitObj)
-    External (_SB_.PCI0.IGPU.IUEH, MethodObj)    // 1 Arguments
+    External (_SB_.PCI0.IGPU.IUEH, MethodObj)
     External (_SB_.PCI0.IGPU.STAT, FieldUnitObj)
     External (_SB_.PCI0.IGPU.TCHE, FieldUnitObj)
     
-    External (_SB_.PCI0.PEG0.HPME, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.PEG0.HPME, MethodObj)
     
     External (_SB_.PCI0.PEG1, UnknownObj)
-    External (_SB_.PCI0.PEG1.HPME, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.PEG1.HPME, MethodObj)
     External (_SB_.PCI0.PEG2, UnknownObj)
-    External (_SB_.PCI0.PEG2.HPME, MethodObj)    // 0 Arguments
+    External (_SB_.PCI0.PEG2.HPME, MethodObj)
     
-    External (D1F0, UnknownObj)
-    External (D1F1, UnknownObj)
-    External (D1F2, UnknownObj)
+    External (D1F0, UnknownObj) // Warning: unresolved
+    External (D1F1, UnknownObj) // Warning: unresolved
+    External (D1F2, UnknownObj) // Warning: unresolved
     External (DIDX, FieldUnitObj)
     External (GSMI, FieldUnitObj)
     External (LIDS, FieldUnitObj)
-    External (MDBG, IntObj)
+    External (MDBG, IntObj) // Warning: unresolved
     External (PDC0, IntObj)
     External (PDC1, IntObj)
     External (PDC2, IntObj)
@@ -3120,15 +3121,12 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                 {
                     Return (^XHC.POSC (Arg1, Arg2, Arg3))
                 }
-                Else
+                ElseIf (LGreaterEqual (OSYS, 0x07DC))
                 {
-                    If (LGreaterEqual (OSYS, 0x07DC))
+                    If (LEqual (XCNT, Zero))
                     {
-                        If (LEqual (XCNT, Zero))
-                        {
-                            ^XHC.XSEL ()
-                            Increment (XCNT)
-                        }
+                        ^XHC.XSEL ()
+                        Increment (XCNT)
                     }
                 }
 
@@ -3305,16 +3303,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
             Device (LPCB)
             {
                 Name (_ADR, 0x001F0000)  // _ADR: Address
-                
-//                Method (_DSM, 4, NotSerialized) // Inject LPC Prop!
-//                {
-//                   Return (Package ()
-//                    {
-//                        "device-id", Buffer (){ 0x18, 0x3A, 0x00, 0x00 }
-//                    })
-//                    
-//                }
-                
                 Scope (\_SB)
                 {
                     OperationRegion (PCI0.LPCB.LPC1, PCI_Config, Zero, 0x0100)
@@ -4100,7 +4088,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             SX44 (SX23, Local0)
                             Return (SX23)
                         }
-                        Return (SX23)
                     }
 
                     Method (SX12, 0, NotSerialized)
@@ -4135,6 +4122,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         SX10 ()
                         Store (\_SB.PHS1 (0x1C), Local0)
                         SX12 ()
+                        //Note:Can't sleep when lid close
 //                        Return (Local0)
                         \_SB.PCI0.LPCB.EC.PCA1 (0x3C, Zero)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x02), Local0)
@@ -4270,30 +4258,21 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             {
                                 Increment (Local0)
                             }
+                            ElseIf (And (LEqual (Local1, One), And (Local0, 0x8000)))
+                            {
+                                Store (0xFFFFFFFF, Local0)
+                            }
+                            ElseIf (And (LEqual (Local1, One), Not (And (Local0, 0x8000))))
+                            {
+                                Store (Local0, Local0)
+                            }
+                            ElseIf (And (Local0, 0x8000))
+                            {
+                                XOr (Local0, 0xFFFF, Local0)
+                            }
                             Else
                             {
-                                If (And (LEqual (Local1, One), And (Local0, 0x8000)))
-                                {
-                                    Store (0xFFFFFFFF, Local0)
-                                }
-                                Else
-                                {
-                                    If (And (LEqual (Local1, One), Not (And (Local0, 0x8000))))
-                                    {
-                                        Store (Local0, Local0)
-                                    }
-                                    Else
-                                    {
-                                        If (And (Local0, 0x8000))
-                                        {
-                                            XOr (Local0, 0xFFFF, Local0)
-                                        }
-                                        Else
-                                        {
-                                            Store (0xFFFFFFFF, Local0)
-                                        }
-                                    }
-                                }
+                                Store (0xFFFFFFFF, Local0)
                             }
 
                             Store (Local0, Index (Arg1, One))
@@ -4545,96 +4524,57 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             {
                                 Store (MZ00, Local0)
                             }
-                            Else
+                            ElseIf (LEqual (Arg0, One))
                             {
-                                If (LEqual (Arg0, One))
-                                {
-                                    Store (MZ01, Local0)
-                                }
-                                Else
-                                {
-                                    If (LEqual (Arg0, 0x02))
-                                    {
-                                        Store (MZ02, Local0)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (Arg0, 0x03))
-                                        {
-                                            Store (MZ03, Local0)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (Arg0, 0x04))
-                                            {
-                                                Store (MZ04, Local0)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (Arg0, 0x05))
-                                                {
-                                                    Store (MZ05, Local0)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (Arg0, 0x06))
-                                                    {
-                                                        Store (MZ06, Local0)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (Arg0, 0x07))
-                                                        {
-                                                            Store (MZ07, Local0)
-                                                        }
-                                                        Else
-                                                        {
-                                                            If (LEqual (Arg0, 0x08))
-                                                            {
-                                                                Store (MZ08, Local0)
-                                                            }
-                                                            Else
-                                                            {
-                                                                If (LEqual (Arg0, 0x0B))
-                                                                {
-                                                                    Store (MZ11, Local0)
-                                                                }
-                                                                Else
-                                                                {
-                                                                    If (LEqual (Arg0, 0x0C))
-                                                                    {
-                                                                        Store (MZ12, Local0)
-                                                                    }
-                                                                    Else
-                                                                    {
-                                                                        If (LEqual (Arg0, 0x0D))
-                                                                        {
-                                                                            Store (MZ13, Local0)
-                                                                        }
-                                                                        Else
-                                                                        {
-                                                                            If (LEqual (Arg0, 0x09))
-                                                                            {
-                                                                                Store (MZ09, Local0)
-                                                                            }
-                                                                            Else
-                                                                            {
-                                                                                If (LEqual (Arg0, 0x0A))
-                                                                                {
-                                                                                    Store (MZ10, Local0)
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                                Store (MZ01, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x02))
+                            {
+                                Store (MZ02, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x03))
+                            {
+                                Store (MZ03, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x04))
+                            {
+                                Store (MZ04, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x05))
+                            {
+                                Store (MZ05, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x06))
+                            {
+                                Store (MZ06, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x07))
+                            {
+                                Store (MZ07, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x08))
+                            {
+                                Store (MZ08, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x0B))
+                            {
+                                Store (MZ11, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x0C))
+                            {
+                                Store (MZ12, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x0D))
+                            {
+                                Store (MZ13, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x09))
+                            {
+                                Store (MZ09, Local0)
+                            }
+                            ElseIf (LEqual (Arg0, 0x0A))
+                            {
+                                Store (MZ10, Local0)
                             }
 
                             Return (Local0)
@@ -4646,40 +4586,25 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             {
                                 Store (Arg1, MZ00)
                             }
-                            Else
+                            ElseIf (LEqual (Arg0, One))
                             {
-                                If (LEqual (Arg0, One))
-                                {
-                                    Store (Arg1, MZ01)
-                                }
-                                Else
-                                {
-                                    If (LEqual (Arg0, 0x02))
-                                    {
-                                        Store (Arg1, MZ02)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (Arg0, 0x03))
-                                        {
-                                            Store (Arg1, MZ03)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (Arg0, 0x07))
-                                            {
-                                                Store (Arg1, MZ04)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (Arg0, 0x04))
-                                                {
-                                                    Store (Arg1, MZ10)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                                Store (Arg1, MZ01)
+                            }
+                            ElseIf (LEqual (Arg0, 0x02))
+                            {
+                                Store (Arg1, MZ02)
+                            }
+                            ElseIf (LEqual (Arg0, 0x03))
+                            {
+                                Store (Arg1, MZ03)
+                            }
+                            ElseIf (LEqual (Arg0, 0x07))
+                            {
+                                Store (Arg1, MZ04)
+                            }
+                            ElseIf (LEqual (Arg0, 0x04))
+                            {
+                                Store (Arg1, MZ10)
                             }
                         }
 
@@ -4925,17 +4850,14 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                                     \_SB.PCI0.LPCB.EC.PCA1 (0xAE, 0x0301)
                                     SX12 ()
                                 }
+                                ElseIf (LEqual (_T_0, One))
+                                {
+                                    SX10 ()
+                                    \_SB.PCI0.LPCB.EC.PCA1 (0xAE, 0x0201)
+                                    SX12 ()
+                                }
                                 Else
                                 {
-                                    If (LEqual (_T_0, One))
-                                    {
-                                        SX10 ()
-                                        \_SB.PCI0.LPCB.EC.PCA1 (0xAE, 0x0201)
-                                        SX12 ()
-                                    }
-                                    Else
-                                    {
-                                    }
                                 }
 
                                 Break
@@ -5138,7 +5060,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         {
                             NEVT ()
                         }
-                        
                     }
 
                     Method (PSW, 2, NotSerialized)
@@ -5629,8 +5550,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             Return (0x0F)
                         }
 
-                        If (LOr (And (LEqual (PKBD, 0xFF), LEqual (PKBC, 0xFF)), LEqual (BID, 
-                            BFCC)))
+                        If (LOr (And (LEqual (PKBD, 0xFF), LEqual (PKBC, 0xFF)), LEqual (BID, BFCC)))
                         {
                             Return (Zero)
                         }
@@ -5689,11 +5609,11 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
                         Return (Package()
                         {
+                            // Note: Function key part seems to not be necessary        // "AAPL,has-embedded-fn-keys", Buffer() { 0x01, 0x00, 0x00, 0x00 },
                             "RM,oem-id", "DELL",
                             "RM,oem-table-id", "HSW-LPT",
                         })
                     }
-                    
                 }
 
                 Device (PS2M)
@@ -5888,41 +5808,32 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                 Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
                 Store (Local0, \_SB.PCI0.RP01.D3HT)
             }
-            Else
+            ElseIf (LEqual (_T_0, 0x03))
             {
-                If (LEqual (_T_0, 0x03))
-                {
-                    Store (\_SB.PCI0.RP03.D3HT, Local0)
-                    Store (Zero, \_SB.PCI0.RP03.D3HT)
-                    Sleep (0x64)
-                    Store (VDPC, Local1)
-                    Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
-                    Store (Local0, \_SB.PCI0.RP03.D3HT)
-                }
-                Else
-                {
-                    If (LEqual (_T_0, 0x04))
-                    {
-                        Store (\_SB.PCI0.RP04.D3HT, Local0)
-                        Store (Zero, \_SB.PCI0.RP04.D3HT)
-                        Sleep (0x64)
-                        Store (VDPC, Local1)
-                        Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
-                        Store (Local0, \_SB.PCI0.RP04.D3HT)
-                    }
-                    Else
-                    {
-                        If (LEqual (_T_0, 0x05))
-                        {
-                            Store (\_SB.PCI0.RP05.D3HT, Local0)
-                            Store (Zero, \_SB.PCI0.RP05.D3HT)
-                            Sleep (0x64)
-                            Store (VDPC, Local1)
-                            Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
-                            Store (Local0, \_SB.PCI0.RP05.D3HT)
-                        }
-                    }
-                }
+                Store (\_SB.PCI0.RP03.D3HT, Local0)
+                Store (Zero, \_SB.PCI0.RP03.D3HT)
+                Sleep (0x64)
+                Store (VDPC, Local1)
+                Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
+                Store (Local0, \_SB.PCI0.RP03.D3HT)
+            }
+            ElseIf (LEqual (_T_0, 0x04))
+            {
+                Store (\_SB.PCI0.RP04.D3HT, Local0)
+                Store (Zero, \_SB.PCI0.RP04.D3HT)
+                Sleep (0x64)
+                Store (VDPC, Local1)
+                Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
+                Store (Local0, \_SB.PCI0.RP04.D3HT)
+            }
+            ElseIf (LEqual (_T_0, 0x05))
+            {
+                Store (\_SB.PCI0.RP05.D3HT, Local0)
+                Store (Zero, \_SB.PCI0.RP05.D3HT)
+                Sleep (0x64)
+                Store (VDPC, Local1)
+                Store (LNotEqual (Match (TBTS, MEQ, Local1, MTR, Zero, Zero), Ones), Local1)
+                Store (Local0, \_SB.PCI0.RP05.D3HT)
             }
 
             Break
@@ -5951,19 +5862,13 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
             {
                 \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x03FF7601, Zero)
             }
-            Else
+            ElseIf (LEqual (_T_0, 0x04))
             {
-                If (LEqual (_T_0, 0x04))
-                {
-                    \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x04FF7601, Zero)
-                }
-                Else
-                {
-                    If (LEqual (_T_0, 0x05))
-                    {
-                        \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x05FF7601, Zero)
-                    }
-                }
+                \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x04FF7601, Zero)
+            }
+            ElseIf (LEqual (_T_0, 0x05))
+            {
+                \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x05FF7601, Zero)
             }
 
             Break
@@ -6071,7 +5976,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
     Method (_WAK, 1, Serialized)  // _WAK: Wake
     {
         If (LOr(LLess(Arg0,1),LGreater(Arg0,5))) { Store(3,Arg0) }
-Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+        Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
         P8XH (One, 0xAB)
         SOST ()
         ADBG ("_WAK")
@@ -6088,8 +5993,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
             }
         }
 
-        If (LAnd (LNotEqual (And (\_SB.PCI0.HDAU.ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (
-            \_SB.PCI0.HDAU.ABAR, 0xFFFFC000), Zero)))
+        If (LAnd (LNotEqual (And (\_SB.PCI0.HDAU.ABAR, 0xFFFFC004), 0xFFFFC004), LNotEqual (And (\_SB.PCI0.HDAU.ABAR, 0xFFFFC000), Zero)))
         {
             Store (\_SB.PCI0.HDAU.ABAR, \_SB.PCI0.HDAU.BARA)
         }
@@ -6102,12 +6006,9 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x030081E2, 0x05)
                 \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x30FF7601, Zero)
             }
-            Else
+            ElseIf (LEqual (_T_0, 0x04))
             {
-                If (LEqual (_T_0, 0x04))
-                {
-                    \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x40FF7601, Zero)
-                }
+                \_SB.PCI0.LPCB.EC.PCA5 (0xFB, 0x40FF7601, Zero)
             }
 
             Break
@@ -6119,8 +6020,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
             {
                 If (LEqual (\_SB.IAOE.ITMR, One))
                 {
-                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02), And (
-                        \_SB.IAOE.WKRS, 0x10))))
+                    If (LAnd (And (\_SB.IAOE.IBT1, One), LOr (And (\_SB.IAOE.WKRS, 0x02), And (\_SB.IAOE.WKRS, 0x10))))
                     {
                         Store (Or (And (\_SB.PCI0.IGPU.STAT, 0xFFFFFFFFFFFFFFFC), One), \_SB.PCI0.IGPU.STAT)
                     }
@@ -6234,8 +6134,8 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
 
         \_SB.PHSR (0x03)
         External(\_SB.PCI0.PEG0.PEGP._OFF, MethodObj)
-If (CondRefOf(\_SB.PCI0.PEG0.PEGP._OFF)) { \_SB.PCI0.PEG0.PEGP._OFF() }
-Return (Package (0x02)
+        If (CondRefOf(\_SB.PCI0.PEG0.PEGP._OFF)) { \_SB.PCI0.PEG0.PEGP._OFF() }
+        Return (Package (0x02)
         {
             Zero, 
             Zero
@@ -6253,9 +6153,7 @@ Return (Package (0x02)
     Method (PNOT, 0, Serialized)
     {
         
-        
         // nothing
-
 
     }
 
@@ -6300,7 +6198,6 @@ Return (Package (0x02)
         Store (Local1, PPL1)
         Store (One, PL1E)
         Store (One, CLP1)
-        Return (Zero)
     }
 
     Method (RPL1, 0, Serialized)
@@ -6347,29 +6244,9 @@ Return (Package (0x02)
                     SPL1 ()
                 }
             }
-            Else
+            ElseIf (LEqual (ECNO, One))
             {
-                If (LEqual (ECNO, One))
-                {
-                    ADBG ("EC Notify")
-                }
-
-                P8XH (Zero, 0xC5)
-                P8XH (One, 0xAB)
-                ADBG ("Exit CS")
-                If (PSCP)
-                {
-                    If (CondRefOf (\_PR.CPU0._PPC))
-                    {
-                        Store (Zero, \_PR.CPU0._PPC)
-                        PNOT ()
-                    }
-                }
-
-                If (PLCS)
-                {
-                    RPL1 ()
-                }
+                ADBG ("EC Notify")
             }
 
             P_CS ()
@@ -6469,7 +6346,7 @@ Return (Package (0x02)
                     Store (0x07D6, OSYS)
                 }
 
-                If(LOr(_OSI("Darwin"),_OSI("Windows 2009")))
+                If (_OSI ("Windows 2009"))
                 {
                     Store (0x07D9, OSYS)
                 }
@@ -6479,7 +6356,7 @@ Return (Package (0x02)
                     Store (0x07DC, OSYS)
                 }
 
-                If (LOr(_OSI("Darwin"),_OSI ("Windows 2013")))
+                If (_OSI ("Windows 2013"))
                 {
                     Store (0x07DD, OSYS)
                 }
@@ -7149,33 +7026,27 @@ Return (Package (0x02)
                                         }
                                     })
                                 }
+                                ElseIf (LEqual (_T_0, 0x02))
+                                {
+                                    Return (Package (0x02)
+                                    {
+                                        One, 
+                                        Package (0x01)
+                                        {
+                                            "\\_SB.PCI0.SAT0.PRT1"
+                                        }
+                                    })
+                                }
+                                ElseIf (LEqual (_T_0, 0x03))
+                                {
+                                    Return (DEVS)
+                                }
                                 Else
                                 {
-                                    If (LEqual (_T_0, 0x02))
+                                    Return (Package (0x01)
                                     {
-                                        Return (Package (0x02)
-                                        {
-                                            One, 
-                                            Package (0x01)
-                                            {
-                                                "\\_SB.PCI0.SAT0.PRT1"
-                                            }
-                                        })
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (_T_0, 0x03))
-                                        {
-                                            Return (DEVS)
-                                        }
-                                        Else
-                                        {
-                                            Return (Package (0x01)
-                                            {
-                                                Zero
-                                            })
-                                        }
-                                    }
+                                        Zero
+                                    })
                                 }
 
                                 Break
@@ -7736,12 +7607,9 @@ Return (Package (0x02)
             {
                 Notify (\_SB.PCI0.XHC, 0x02)
             }
-            Else
+            ElseIf (LEqual (\_SB.PCI0.XHC.PMEE, Zero))
             {
-                If (LEqual (\_SB.PCI0.XHC.PMEE, Zero))
-                {
-                    Store (One, \_SB.PCI0.XHC.PMES)
-                }
+                Store (One, \_SB.PCI0.XHC.PMES)
             }
 
             If (LAnd (\_SB.PCI0.HDEF.PMEE, \_SB.PCI0.HDEF.PMES))
@@ -8131,7 +7999,6 @@ Return (Package (0x02)
 
                 Return (TEMP)
             }
-            Return (TEMP)
         }
 
         Method (RDGP, 1, Serialized)
@@ -8148,7 +8015,6 @@ Return (Package (0x02)
 
                 Return (TEMP)
             }
-            Return (TEMP)
         }
 
         Method (WTGP, 2, Serialized)
@@ -8247,16 +8113,13 @@ Return (Package (0x02)
                 {
                     Subtract (Arg0, 0x28, Local1)
                 }
+                ElseIf (LLessEqual (Arg0, 0x0A))
+                {
+                    Subtract (Arg0, 0x08, Local1)
+                }
                 Else
                 {
-                    If (LLessEqual (Arg0, 0x0A))
-                    {
-                        Subtract (Arg0, 0x08, Local1)
-                    }
-                    Else
-                    {
-                        Subtract (Arg0, 0x0A, Local1)
-                    }
+                    Subtract (Arg0, 0x0A, Local1)
                 }
 
                 Store (ShiftLeft (One, Local1), Local2)
@@ -8286,16 +8149,13 @@ Return (Package (0x02)
                 {
                     Subtract (Arg0, 0x28, Local1)
                 }
+                ElseIf (LLessEqual (Arg0, 0x0A))
+                {
+                    Subtract (Arg0, 0x08, Local1)
+                }
                 Else
                 {
-                    If (LLessEqual (Arg0, 0x0A))
-                    {
-                        Subtract (Arg0, 0x08, Local1)
-                    }
-                    Else
-                    {
-                        Subtract (Arg0, 0x0A, Local1)
-                    }
+                    Subtract (Arg0, 0x0A, Local1)
                 }
 
                 Store (ShiftLeft (One, Local1), Local2)
@@ -8554,26 +8414,20 @@ Return (Package (0x02)
                                             })
                                         }
                                     }
-                                    Else
+                                    ElseIf (LEqual (_T_0, One))
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (SDGV, 0xFF))
                                         {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
+                                            Return (Zero)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
+                                            Return (One)
                                         }
+                                    }
+                                    ElseIf (LEqual (_T_0, 0x02))
+                                    {
+                                        Return (SDGV)
                                     }
 
                                     Break
@@ -8643,26 +8497,20 @@ Return (Package (0x02)
                                             })
                                         }
                                     }
-                                    Else
+                                    ElseIf (LEqual (_T_0, One))
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (SDGV, 0xFF))
                                         {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
+                                            Return (Zero)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
+                                            Return (One)
                                         }
+                                    }
+                                    ElseIf (LEqual (_T_0, 0x02))
+                                    {
+                                        Return (SDGV)
                                     }
 
                                     Break
@@ -8746,26 +8594,20 @@ Return (Package (0x02)
                                             })
                                         }
                                     }
-                                    Else
+                                    ElseIf (LEqual (_T_0, One))
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (SDGV, 0xFF))
                                         {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
+                                            Return (Zero)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
+                                            Return (One)
                                         }
+                                    }
+                                    ElseIf (LEqual (_T_0, 0x02))
+                                    {
+                                        Return (SDGV)
                                     }
 
                                     Break
@@ -8835,26 +8677,20 @@ Return (Package (0x02)
                                             })
                                         }
                                     }
-                                    Else
+                                    ElseIf (LEqual (_T_0, One))
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (SDGV, 0xFF))
                                         {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
+                                            Return (Zero)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
+                                            Return (One)
                                         }
+                                    }
+                                    ElseIf (LEqual (_T_0, 0x02))
+                                    {
+                                        Return (SDGV)
                                     }
 
                                     Break
@@ -8875,18 +8711,19 @@ Return (Package (0x02)
                 If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
                 Return (Package()
                 {
-                    "AAPL,clock-id", Buffer() { 0x01 },
-                    "built-in", Buffer() { 0x00 },
-                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                    "AAPL,current-available", 2100,
-                    "AAPL,current-extra", 2200,
-                    "AAPL,current-extra-in-sleep", 1600,
-                    "AAPL,device-internal", 0x02,
-                    "AAPL,max-port-current-in-sleep", 2100,
+                    "AAPL,clock-id", Buffer (One) { 0x01 },
+				   "AAPL,slot-name", "Built In",
+				   "name", "Intel EHCI Controller",
+				   "model", Buffer(0x3E) {"Intel 8 Series Chipset Family USB Enhanced Host Controller #1"},
+				   "device_type", Buffer (0x0E) {"USB Controller"},
+				   "AAPL,current-available", 2100,
+				   "AAPL,current-extra", 2200,
+				   "AAPL,current-extra-in-sleep", 1600,
+				   "AAPL,max-port-current-in-sleep", 2100,
+				   "AAPL,device-internal", 0x02,
+				   "built-in", Buffer() { 0x00 }
                 })
             }
-            
         }
 
         Device (EH02)
@@ -9050,26 +8887,20 @@ Return (Package (0x02)
                                             })
                                         }
                                     }
-                                    Else
+                                    ElseIf (LEqual (_T_0, One))
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (SDGV, 0xFF))
                                         {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
+                                            Return (Zero)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
+                                            Return (One)
                                         }
+                                    }
+                                    ElseIf (LEqual (_T_0, 0x02))
+                                    {
+                                        Return (SDGV)
                                     }
 
                                     Break
@@ -9139,26 +8970,20 @@ Return (Package (0x02)
                                             })
                                         }
                                     }
-                                    Else
+                                    ElseIf (LEqual (_T_0, One))
                                     {
-                                        If (LEqual (_T_0, One))
+                                        If (LEqual (SDGV, 0xFF))
                                         {
-                                            If (LEqual (SDGV, 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
+                                            Return (Zero)
                                         }
                                         Else
                                         {
-                                            If (LEqual (_T_0, 0x02))
-                                            {
-                                                Return (SDGV)
-                                            }
+                                            Return (One)
                                         }
+                                    }
+                                    ElseIf (LEqual (_T_0, 0x02))
+                                    {
+                                        Return (SDGV)
                                     }
 
                                     Break
@@ -9281,18 +9106,19 @@ Return (Package (0x02)
                 If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
                 Return (Package()
                 {
-                    "AAPL,clock-id", Buffer() { 0x01 },
-                    "built-in", Buffer() { 0x00 },
-                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                    "AAPL,current-available", 2100,
-                    "AAPL,current-extra", 2200,
-                    "AAPL,current-extra-in-sleep", 1600,
-                    "AAPL,device-internal", 0x02,
-                    "AAPL,max-port-current-in-sleep", 2100,
+                    "AAPL,clock-id", Buffer (One) { 0x01 },
+				   "AAPL,slot-name", "Built In",
+				   "name", "Intel EHCI Controller",
+				   "model", Buffer (0x3E) {"Intel 8 Series Chipset Family USB Enhanced Host Controller #2"},
+				   "device_type", Buffer (0x0E) {"USB Controller"},
+				   "AAPL,current-available", 2100,
+				   "AAPL,current-extra", 2200,
+				   "AAPL,current-extra-in-sleep", 1600,
+				   "AAPL,max-port-current-in-sleep", 2100,
+				   "AAPL,device-internal", 0x02,
+				   "built-in", Buffer() { 0x00 }
                 })
             }
-            
         }
 
         Device (XHC)
@@ -9357,103 +9183,61 @@ Return (Package (0x02)
                         {
                             Return (One)
                         }
-                        Else
+                        ElseIf (LEqual (_T_0, 0x02))
                         {
-                            If (LEqual (_T_0, 0x02))
-                            {
-                                Return (0x02)
-                            }
-                            Else
-                            {
-                                If (LEqual (_T_0, 0x03))
-                                {
-                                    Return (0x04)
-                                }
-                                Else
-                                {
-                                    If (LEqual (_T_0, 0x04))
-                                    {
-                                        Return (0x08)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (_T_0, 0x05))
-                                        {
-                                            Return (0x0100)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (_T_0, 0x06))
-                                            {
-                                                Return (0x0200)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (_T_0, 0x07))
-                                                {
-                                                    Return (0x0400)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (_T_0, 0x08))
-                                                    {
-                                                        Return (0x0800)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (_T_0, 0x09))
-                                                        {
-                                                            Return (0x10)
-                                                        }
-                                                        Else
-                                                        {
-                                                            If (LEqual (_T_0, 0x0A))
-                                                            {
-                                                                Return (0x20)
-                                                            }
-                                                            Else
-                                                            {
-                                                                If (LEqual (_T_0, 0x0B))
-                                                                {
-                                                                    Return (0x1000)
-                                                                }
-                                                                Else
-                                                                {
-                                                                    If (LEqual (_T_0, 0x0C))
-                                                                    {
-                                                                        Return (0x2000)
-                                                                    }
-                                                                    Else
-                                                                    {
-                                                                        If (LEqual (_T_0, 0x0D))
-                                                                        {
-                                                                            Return (0x40)
-                                                                        }
-                                                                        Else
-                                                                        {
-                                                                            If (LEqual (_T_0, 0x0E))
-                                                                            {
-                                                                                Return (0x80)
-                                                                            }
-                                                                            Else
-                                                                            {
-                                                                                If (LEqual (_T_0, 0x0F))
-                                                                                {
-                                                                                    Return (0x4000)
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            Return (0x02)
+                        }
+                        ElseIf (LEqual (_T_0, 0x03))
+                        {
+                            Return (0x04)
+                        }
+                        ElseIf (LEqual (_T_0, 0x04))
+                        {
+                            Return (0x08)
+                        }
+                        ElseIf (LEqual (_T_0, 0x05))
+                        {
+                            Return (0x0100)
+                        }
+                        ElseIf (LEqual (_T_0, 0x06))
+                        {
+                            Return (0x0200)
+                        }
+                        ElseIf (LEqual (_T_0, 0x07))
+                        {
+                            Return (0x0400)
+                        }
+                        ElseIf (LEqual (_T_0, 0x08))
+                        {
+                            Return (0x0800)
+                        }
+                        ElseIf (LEqual (_T_0, 0x09))
+                        {
+                            Return (0x10)
+                        }
+                        ElseIf (LEqual (_T_0, 0x0A))
+                        {
+                            Return (0x20)
+                        }
+                        ElseIf (LEqual (_T_0, 0x0B))
+                        {
+                            Return (0x1000)
+                        }
+                        ElseIf (LEqual (_T_0, 0x0C))
+                        {
+                            Return (0x2000)
+                        }
+                        ElseIf (LEqual (_T_0, 0x0D))
+                        {
+                            Return (0x40)
+                        }
+                        ElseIf (LEqual (_T_0, 0x0E))
+                        {
+                            Return (0x80)
+                        }
+                        ElseIf (LEqual (_T_0, 0x0F))
+                        {
+                            Return (0x4000)
                         }
 
                         Break
@@ -9468,67 +9252,42 @@ Return (Package (0x02)
                         {
                             Return (One)
                         }
-                        Else
+                        ElseIf (LEqual (_T_1, 0x02))
                         {
-                            If (LEqual (_T_1, 0x02))
-                            {
-                                Return (0x02)
-                            }
-                            Else
-                            {
-                                If (LEqual (_T_1, 0x03))
-                                {
-                                    Return (0x04)
-                                }
-                                Else
-                                {
-                                    If (LEqual (_T_1, 0x04))
-                                    {
-                                        Return (0x08)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (_T_1, 0x05))
-                                        {
-                                            Return (0x10)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (_T_1, 0x06))
-                                            {
-                                                Return (0x20)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (_T_1, 0x07))
-                                                {
-                                                    Return (0x40)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (_T_1, 0x08))
-                                                    {
-                                                        Return (0x80)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (_T_1, 0x09))
-                                                        {
-                                                            Return (0x0100)
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            Return (0x02)
+                        }
+                        ElseIf (LEqual (_T_1, 0x03))
+                        {
+                            Return (0x04)
+                        }
+                        ElseIf (LEqual (_T_1, 0x04))
+                        {
+                            Return (0x08)
+                        }
+                        ElseIf (LEqual (_T_1, 0x05))
+                        {
+                            Return (0x10)
+                        }
+                        ElseIf (LEqual (_T_1, 0x06))
+                        {
+                            Return (0x20)
+                        }
+                        ElseIf (LEqual (_T_1, 0x07))
+                        {
+                            Return (0x40)
+                        }
+                        ElseIf (LEqual (_T_1, 0x08))
+                        {
+                            Return (0x80)
+                        }
+                        ElseIf (LEqual (_T_1, 0x09))
+                        {
+                            Return (0x0100)
                         }
 
                         Break
                     }
                 }
-                Return (0x0100)
             }
 
             Name (XRST, Zero)
@@ -9581,9 +9340,7 @@ Return (Package (0x02)
                 Store (One, CLK2)
                 If (LEqual (PCHS, 0x02))
                 {
-                    While (LOr (LOr (LEqual (And (PSC1, 0x03F8), 0x02E0), LEqual (And (PSC2, 
-                        0x03F8), 0x02E0)), LOr (LEqual (And (PSC3, 0x03F8), 0x02E0), LEqual (And (PSC4, 
-                        0x03F8), 0x02E0))))
+                    While (LOr (LOr (LEqual (And (PSC1, 0x03F8), 0x02E0), LEqual (And (PSC2, 0x03F8), 0x02E0)), LOr (LEqual (And (PSC3, 0x03F8), 0x02E0), LEqual (And (PSC4, 0x03F8), 0x02E0))))
                     {
                         Stall (0x0A)
                     }
@@ -9656,7 +9413,6 @@ Return (Package (0x02)
                 And (PDBM, 0xFFFFFFFFFFFFFFFD, PDBM)
                 Store (Local2, MEMB)
                 Store (Local1, PDBM)
-                Return (Zero)
             }
 
             Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -9723,7 +9479,6 @@ Return (Package (0x02)
                 And (PDBM, 0xFFFFFFFFFFFFFFFD, PDBM)
                 Store (Local2, MEMB)
                 Store (Local1, PDBM)
-                Return (Zero)
             }
 
             Method (CUID, 1, Serialized)
@@ -9751,30 +9506,24 @@ Return (Package (0x02)
                     {
                         ESEL ()
                     }
-                    Else
+                    ElseIf (LEqual (And (CDID, 0xF000), 0x8000))
                     {
-                        If (LEqual (And (CDID, 0xF000), 0x8000))
+                        If (LGreater (Arg0, One))
                         {
-                            If (LGreater (Arg0, One))
-                            {
-                                XSEL ()
-                            }
-                            Else
-                            {
-                                Or (CDW1, 0x0A, CDW1)
-                            }
+                            XSEL ()
                         }
                         Else
                         {
-                            If (LGreater (Arg0, 0x02))
-                            {
-                                XSEL ()
-                            }
-                            Else
-                            {
-                                Or (CDW1, 0x0A, CDW1)
-                            }
+                            Or (CDW1, 0x0A, CDW1)
                         }
+                    }
+                    ElseIf (LGreater (Arg0, 0x02))
+                    {
+                        XSEL ()
+                    }
+                    Else
+                    {
+                        Or (CDW1, 0x0A, CDW1)
                     }
                 }
 
@@ -9841,8 +9590,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (One), PR2)), LEqual (And (UPXD, One
-                            ), One)))
+                        If (LOr (LNot (And (PR2S (One), PR2)), LEqual (And (UPXD, One), One)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -9883,8 +9631,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (0x02), PR2)), LEqual (And (UPXD, 0x02
-                            ), 0x02)))
+                        If (LOr (LNot (And (PR2S (0x02), PR2)), LEqual (And (UPXD, 0x02), 0x02)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -9925,8 +9672,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (0x03), PR2)), LEqual (And (UPXD, 0x04
-                            ), 0x04)))
+                        If (LOr (LNot (And (PR2S (0x03), PR2)), LEqual (And (UPXD, 0x04), 0x04)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -9967,8 +9713,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (0x04), PR2)), LEqual (And (UPXD, 0x08
-                            ), 0x08)))
+                        If (LOr (LNot (And (PR2S (0x04), PR2)), LEqual (And (UPXD, 0x08), 0x08)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10009,8 +9754,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (0x05), PR2)), LEqual (And (UPXD, 0x10
-                            ), 0x10)))
+                        If (LOr (LNot (And (PR2S (0x05), PR2)), LEqual (And (UPXD, 0x10), 0x10)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10059,8 +9803,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (0x06), PR2)), LEqual (And (UPXD, 0x20
-                            ), 0x20)))
+                        If (LOr (LNot (And (PR2S (0x06), PR2)), LEqual (And (UPXD, 0x20), 0x20)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10095,8 +9838,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR2S (0x07), PR2)), LEqual (And (UPXD, 0x40
-                            ), 0x40)))
+                        If (LOr (LNot (And (PR2S (0x07), PR2)), LEqual (And (UPXD, 0x40), 0x40)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10142,8 +9884,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR3, One)), LEqual (And (UPXD, One), 
-                            One)))
+                        If (LOr (LNot (And (PR3, One)), LEqual (And (UPXD, One), One)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10195,8 +9936,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR3, 0x02)), LEqual (And (UPXD, 0x02), 
-                            0x02)))
+                        If (LOr (LNot (And (PR3, 0x02)), LEqual (And (UPXD, 0x02), 0x02)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10248,8 +9988,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR3, 0x04)), LEqual (And (UPXD, 0x04), 
-                            0x04)))
+                        If (LOr (LNot (And (PR3, 0x04)), LEqual (And (UPXD, 0x04), 0x04)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10301,8 +10040,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR3, 0x08)), LEqual (And (UPXD, 0x08), 
-                            0x08)))
+                        If (LOr (LNot (And (PR3, 0x08)), LEqual (And (UPXD, 0x08), 0x08)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10354,8 +10092,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR3, 0x10)), LEqual (And (UPXD, 0x10), 
-                            0x10)))
+                        If (LOr (LNot (And (PR3, 0x10)), LEqual (And (UPXD, 0x10), 0x10)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10407,8 +10144,7 @@ Return (Package (0x02)
                             Zero, 
                             Zero
                         })
-                        If (LOr (LNot (And (PR3, 0x20)), LEqual (And (UPXD, 0x20), 
-                            0x20)))
+                        If (LOr (LNot (And (PR3, 0x20)), LEqual (And (UPXD, 0x20), 0x20)))
                         {
                             Store (Zero, Index (UPCP, Zero))
                         }
@@ -10445,18 +10181,19 @@ Return (Package (0x02)
                 If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
                 Return (Package()
                 {
-                    "AAPL,clock-id", Buffer() { 0x02 },
-                    "built-in", Buffer() { 0x00 },
-                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
-                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
-                    "AAPL,current-available", 2100,
-                    "AAPL,current-extra", 2200,
-                    "AAPL,current-extra-in-sleep", 1600,
-                    "AAPL,device-internal", 0x02,
-                    "AAPL,max-port-current-in-sleep", 2100,
+                    "AAPL,clock-id", Buffer (One) { 0x02 },
+				   "AAPL,slot-name", "Built In",
+				   "name", "Intel XHCI Controller",
+				   "model", Buffer (0x37) {"Intel 8 Series Chipset Family USB xHCI Host Controller"},
+				   "device_type", Buffer (0x0E) {"USB Controller"},
+				   "AAPL,current-available", 2100,
+				   "AAPL,current-extra", 2200,
+				   "AAPL,current-extra-in-sleep", 1600,
+				   "AAPL,max-port-current-in-sleep", 2100,
+				   "AAPL,device-internal", 0x02,
+				   "built-in", Buffer() { 0x00 }
                 })
             }
-            
         }
 
         Device (HDEF)
@@ -10660,65 +10397,44 @@ Return (Package (0x02)
                             CreateDWordField (BUF1, \_SB.PCI0.SIRC._Y17._BAS, BAR1)  // _BAS: Base Address
                             Return (BAR1)
                         }
+                        ElseIf (LEqual (_T_0, 0x02))
+                        {
+                            CreateDWordField (BUF2, \_SB.PCI0.SIRC._Y18._BAS, BAR2)  // _BAS: Base Address
+                            Return (BAR2)
+                        }
+                        ElseIf (LEqual (_T_0, 0x03))
+                        {
+                            CreateDWordField (BUF3, \_SB.PCI0.SIRC._Y19._BAS, BAR3)  // _BAS: Base Address
+                            Return (BAR3)
+                        }
+                        ElseIf (LEqual (_T_0, 0x04))
+                        {
+                            CreateDWordField (BUF4, \_SB.PCI0.SIRC._Y1A._BAS, BAR4)  // _BAS: Base Address
+                            Return (BAR4)
+                        }
+                        ElseIf (LEqual (_T_0, 0x05))
+                        {
+                            CreateDWordField (BUF5, \_SB.PCI0.SIRC._Y1B._BAS, BAR5)  // _BAS: Base Address
+                            Return (BAR5)
+                        }
+                        ElseIf (LEqual (_T_0, 0x06))
+                        {
+                            CreateDWordField (BUF6, \_SB.PCI0.SIRC._Y1C._BAS, BAR6)  // _BAS: Base Address
+                            Return (BAR6)
+                        }
+                        ElseIf (LEqual (_T_0, 0x07))
+                        {
+                            CreateDWordField (BUF7, \_SB.PCI0.SIRC._Y1D._BAS, BAR7)  // _BAS: Base Address
+                            Return (BAR7)
+                        }
+                        ElseIf (LEqual (_T_0, 0x08))
+                        {
+                            CreateDWordField (BUF8, \_SB.PCI0.SIRC._Y1E._BAS, BAR8)  // _BAS: Base Address
+                            Return (BAR8)
+                        }
                         Else
                         {
-                            If (LEqual (_T_0, 0x02))
-                            {
-                                CreateDWordField (BUF2, \_SB.PCI0.SIRC._Y18._BAS, BAR2)  // _BAS: Base Address
-                                Return (BAR2)
-                            }
-                            Else
-                            {
-                                If (LEqual (_T_0, 0x03))
-                                {
-                                    CreateDWordField (BUF3, \_SB.PCI0.SIRC._Y19._BAS, BAR3)  // _BAS: Base Address
-                                    Return (BAR3)
-                                }
-                                Else
-                                {
-                                    If (LEqual (_T_0, 0x04))
-                                    {
-                                        CreateDWordField (BUF4, \_SB.PCI0.SIRC._Y1A._BAS, BAR4)  // _BAS: Base Address
-                                        Return (BAR4)
-                                    }
-                                    Else
-                                    {
-                                        If (LEqual (_T_0, 0x05))
-                                        {
-                                            CreateDWordField (BUF5, \_SB.PCI0.SIRC._Y1B._BAS, BAR5)  // _BAS: Base Address
-                                            Return (BAR5)
-                                        }
-                                        Else
-                                        {
-                                            If (LEqual (_T_0, 0x06))
-                                            {
-                                                CreateDWordField (BUF6, \_SB.PCI0.SIRC._Y1C._BAS, BAR6)  // _BAS: Base Address
-                                                Return (BAR6)
-                                            }
-                                            Else
-                                            {
-                                                If (LEqual (_T_0, 0x07))
-                                                {
-                                                    CreateDWordField (BUF7, \_SB.PCI0.SIRC._Y1D._BAS, BAR7)  // _BAS: Base Address
-                                                    Return (BAR7)
-                                                }
-                                                Else
-                                                {
-                                                    If (LEqual (_T_0, 0x08))
-                                                    {
-                                                        CreateDWordField (BUF8, \_SB.PCI0.SIRC._Y1E._BAS, BAR8)  // _BAS: Base Address
-                                                        Return (BAR8)
-                                                    }
-                                                    Else
-                                                    {
-                                                        Return (0xFFFFFFFF)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            Return (0xFFFFFFFF)
                         }
 
                         Break
@@ -12026,12 +11742,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                 
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
@@ -12096,11 +11813,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One) 
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
@@ -12146,11 +11865,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12252,10 +11973,13 @@ Return (Package (0x02)
                             Return (Zero)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12355,11 +12079,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12425,11 +12151,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12495,11 +12223,13 @@ Return (Package (0x02)
                             Return (0x0F)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12565,10 +12295,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12598,7 +12331,8 @@ Return (Package (0x02)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y2A._INT, VAL3)  // _INT: Interrupts
+//                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y2A._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD0._CRS._Y2A._INT, VAL3)
                         Store (0x1B, VAL3)
                     }
 
@@ -12640,11 +12374,13 @@ Return (Package (0x02)
                             Return (0x20)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
-
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12674,7 +12410,8 @@ Return (Package (0x02)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y2B._INT, VAL3)  // _INT: Interrupts
+//                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y2B._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD1._CRS._Y2B._INT, VAL3)
                         Store (0x1B, VAL3)
                     }
 
@@ -12716,10 +12453,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12749,7 +12489,8 @@ Return (Package (0x02)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y2C._INT, VAL3)  // _INT: Interrupts
+//                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y2C._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD2._CRS._Y2C._INT, VAL3)
                         Store (0x1B, VAL3)
                     }
 
@@ -12791,10 +12532,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12824,7 +12568,8 @@ Return (Package (0x02)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2D._INT, VAL3)  // _INT: Interrupts
+//                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2D._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD3._CRS._Y2D._INT, VAL3)
                         Store (0x1B, VAL3)
                     }
 
@@ -12878,10 +12623,13 @@ Return (Package (0x02)
                             Return (One)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -12911,7 +12659,8 @@ Return (Package (0x02)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2E._INT, VAL3)  // _INT: Interrupts
+//                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2E._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD7._CRS._Y2E._INT, VAL3)
                         Store (0x1B, VAL3)
                         If (LEqual (S0ID, Zero))
                         {
@@ -13013,10 +12762,13 @@ Return (Package (0x02)
                             Return (0x20)
                         }
                     }
-                    Return (Buffer (One)
+                    Else
+                    {
+                        Return (Buffer (One)
                         {
                              0x00                                           
                         })
+                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -13046,7 +12798,8 @@ Return (Package (0x02)
                     })
                     If (LEqual (GR13, One))
                     {
-                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2F._INT, VAL3)  // _INT: Interrupts
+//                        CreateByteField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2F._INT, VAL3)  // _INT: Interrupts
+                        CreateDWordField (SBFI, \_SB.PCI0.I2C1.TPD8._CRS._Y2F._INT, VAL3)
                         Store (0x1B, VAL3)
                         If (LEqual (S0ID, Zero))
                         {
@@ -13368,29 +13121,23 @@ Return (Package (0x02)
                         Store (^^I2C0.ACD0.SCLK, SCLK)
                         Store (^^I2C0.ACD0.SSPM, SSPM)
                     }
+                    ElseIf (LEqual (_T_0, One))
+                    {
+                        Store (^^I2C0.ACD1.MCLK, MCLK)
+                        Store (^^I2C0.ACD1.SCLK, SCLK)
+                        Store (^^I2C0.ACD1.SSPM, SSPM)
+                    }
+                    ElseIf (LEqual (_T_0, 0x02))
+                    {
+                        Store (^^I2C0.ACD2.MCLK, MCLK)
+                        Store (^^I2C0.ACD2.SCLK, SCLK)
+                        Store (^^I2C0.ACD2.SSPM, SSPM)
+                    }
                     Else
                     {
-                        If (LEqual (_T_0, One))
-                        {
-                            Store (^^I2C0.ACD1.MCLK, MCLK)
-                            Store (^^I2C0.ACD1.SCLK, SCLK)
-                            Store (^^I2C0.ACD1.SSPM, SSPM)
-                        }
-                        Else
-                        {
-                            If (LEqual (_T_0, 0x02))
-                            {
-                                Store (^^I2C0.ACD2.MCLK, MCLK)
-                                Store (^^I2C0.ACD2.SCLK, SCLK)
-                                Store (^^I2C0.ACD2.SSPM, SSPM)
-                            }
-                            Else
-                            {
-                                Store (^^I2C0.ACD0.MCLK, MCLK)
-                                Store (^^I2C0.ACD0.SCLK, SCLK)
-                                Store (^^I2C0.ACD0.SSPM, SSPM)
-                            }
-                        }
+                        Store (^^I2C0.ACD0.MCLK, MCLK)
+                        Store (^^I2C0.ACD0.SCLK, SCLK)
+                        Store (^^I2C0.ACD0.SSPM, SSPM)
                     }
 
                     Break
@@ -13560,66 +13307,57 @@ Return (Package (0x02)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFF)
                                     {
-                                        If (OBFF)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRE)
                                     {
-                                        If (LEqual (Arg1, 0x02))
+                                        If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
                                         {
-                                            If (LTRE)
+                                            If (LEqual (PCHS, One))
                                             {
-                                                If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
-                                                {
-                                                    If (LEqual (PCHS, One))
-                                                    {
-                                                        Store (0x0846, LMSL)
-                                                        Store (0x0846, LNSL)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (PCHS, 0x02))
-                                                        {
-                                                            Store (0x1003, LMSL)
-                                                            Store (0x1003, LNSL)
-                                                        }
-                                                    }
-                                                }
-
-                                                Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (LMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
+                                                Store (0x0846, LMSL)
+                                                Store (0x0846, LNSL)
                                             }
-                                            Else
+                                            ElseIf (LEqual (PCHS, 0x02))
                                             {
-                                                Return (Zero)
+                                                Store (0x1003, LMSL)
+                                                Store (0x1003, LNSL)
                                             }
                                         }
+
+                                        Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (LMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -13798,66 +13536,57 @@ Return (Package (0x02)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFF)
                                     {
-                                        If (OBFF)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRE)
                                     {
-                                        If (LEqual (Arg1, 0x02))
+                                        If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
                                         {
-                                            If (LTRE)
+                                            If (LEqual (PCHS, One))
                                             {
-                                                If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
-                                                {
-                                                    If (LEqual (PCHS, One))
-                                                    {
-                                                        Store (0x0846, LMSL)
-                                                        Store (0x0846, LNSL)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (PCHS, 0x02))
-                                                        {
-                                                            Store (0x1003, LMSL)
-                                                            Store (0x1003, LNSL)
-                                                        }
-                                                    }
-                                                }
-
-                                                Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (LMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
+                                                Store (0x0846, LMSL)
+                                                Store (0x0846, LNSL)
                                             }
-                                            Else
+                                            ElseIf (LEqual (PCHS, 0x02))
                                             {
-                                                Return (Zero)
+                                                Store (0x1003, LMSL)
+                                                Store (0x1003, LNSL)
                                             }
                                         }
+
+                                        Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (LMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -14041,66 +13770,57 @@ Return (Package (0x02)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFF)
                                     {
-                                        If (OBFF)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRE)
                                     {
-                                        If (LEqual (Arg1, 0x02))
+                                        If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
                                         {
-                                            If (LTRE)
+                                            If (LEqual (PCHS, One))
                                             {
-                                                If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
-                                                {
-                                                    If (LEqual (PCHS, One))
-                                                    {
-                                                        Store (0x0846, LMSL)
-                                                        Store (0x0846, LNSL)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (PCHS, 0x02))
-                                                        {
-                                                            Store (0x1003, LMSL)
-                                                            Store (0x1003, LNSL)
-                                                        }
-                                                    }
-                                                }
-
-                                                Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (LMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
+                                                Store (0x0846, LMSL)
+                                                Store (0x0846, LNSL)
                                             }
-                                            Else
+                                            ElseIf (LEqual (PCHS, 0x02))
                                             {
-                                                Return (Zero)
+                                                Store (0x1003, LMSL)
+                                                Store (0x1003, LNSL)
                                             }
                                         }
+
+                                        Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (LMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -14284,66 +14004,57 @@ Return (Package (0x02)
                                     Return (Zero)
                                 }
                             }
-                            Else
+                            ElseIf (LEqual (_T_1, 0x04))
                             {
-                                If (LEqual (_T_1, 0x04))
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (Arg1, 0x02))
+                                    If (OBFF)
                                     {
-                                        If (OBFF)
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
-                                        Else
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00 
+                                        })
+                                    }
+                                    Else
+                                    {
+                                        Return (Buffer (0x10)
                                         {
-                                            Return (Buffer (0x10)
-                                            {
-                                                /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                                                /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
-                                            })
-                                        }
+                                            /* 0000 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                            /* 0008 */  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+                                        })
                                     }
                                 }
-                                Else
+                            }
+                            ElseIf (LEqual (_T_1, 0x06))
+                            {
+                                If (LEqual (Arg1, 0x02))
                                 {
-                                    If (LEqual (_T_1, 0x06))
+                                    If (LTRE)
                                     {
-                                        If (LEqual (Arg1, 0x02))
+                                        If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
                                         {
-                                            If (LTRE)
+                                            If (LEqual (PCHS, One))
                                             {
-                                                If (LOr (LEqual (LMSL, 0xFFFFFFFF), LEqual (LNSL, 0xFFFFFFFF)))
-                                                {
-                                                    If (LEqual (PCHS, One))
-                                                    {
-                                                        Store (0x0846, LMSL)
-                                                        Store (0x0846, LNSL)
-                                                    }
-                                                    Else
-                                                    {
-                                                        If (LEqual (PCHS, 0x02))
-                                                        {
-                                                            Store (0x1003, LMSL)
-                                                            Store (0x1003, LNSL)
-                                                        }
-                                                    }
-                                                }
-
-                                                Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
-                                                Store (And (LMSL, 0x03FF), Index (LTRV, One))
-                                                Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
-                                                Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
-                                                Return (LTRV)
+                                                Store (0x0846, LMSL)
+                                                Store (0x0846, LNSL)
                                             }
-                                            Else
+                                            ElseIf (LEqual (PCHS, 0x02))
                                             {
-                                                Return (Zero)
+                                                Store (0x1003, LMSL)
+                                                Store (0x1003, LNSL)
                                             }
                                         }
+
+                                        Store (And (ShiftRight (LMSL, 0x0A), 0x07), Index (LTRV, Zero))
+                                        Store (And (LMSL, 0x03FF), Index (LTRV, One))
+                                        Store (And (ShiftRight (LNSL, 0x0A), 0x07), Index (LTRV, 0x02))
+                                        Store (And (LNSL, 0x03FF), Index (LTRV, 0x03))
+                                        Return (LTRV)
+                                    }
+                                    Else
+                                    {
+                                        Return (Zero)
                                     }
                                 }
                             }
@@ -14363,7 +14074,6 @@ Return (Package (0x02)
 
             Device (PXSX)
             {
-                
                 Name (_ADR, Zero)
                 Name (_SUN, One)
                 Name (_PRW, Package (0x02) {0x09,0x04})
@@ -14378,13 +14088,12 @@ Return (Package (0x02)
                         "subsystem-id", Buffer() { 0x34, 0x01, 0x00, 0x00 },
                         "subsystem-vendor-id", Buffer() { 0x6B, 0x10, 0x00, 0x00 },
                         "IOName", "pci14e4,432b",
-                        //"name", "pci168c,2a",
+                        "name", "Broadcom BCM94352HMB",
                         "AAPL,slot-name", Buffer() { "AirPort" },
                         "device_type", Buffer() { "AirPort" },
                         "model", Buffer() { "Broadcom WiFi Adapter" }
                     })
                 }
-
             }
 
             Method (HPME, 0, Serialized)
@@ -14485,19 +14194,16 @@ Return (Package (0x02)
                                 Store (0xEF, CMMD)
                             }
                         }
+                        ElseIf (LEqual (And (W119, 0x20), 0x20))
+                        {
+                            If (LEqual (And (W120, 0x20), Zero))
+                            {
+                                Store (0x41, FEAT)
+                                Store (0xEF, CMMD)
+                            }
+                        }
                         Else
                         {
-                            If (LEqual (And (W119, 0x20), 0x20))
-                            {
-                                If (LEqual (And (W120, 0x20), Zero))
-                                {
-                                    Store (0x41, FEAT)
-                                    Store (0xEF, CMMD)
-                                }
-                            }
-                            Else
-                            {
-                            }
                         }
                     }
 
@@ -14507,8 +14213,7 @@ Return (Package (0x02)
 
                 Method (_GTF, 0, Serialized)  // _GTF: Get Task File
                 {
-                    If (LAnd (LAnd (LEqual (DVS0, One), LEqual (And (FDEV, One), One)), 
-                        LEqual (And (FDRP, 0x80), 0x80)))
+                    If (LAnd (LAnd (LEqual (DVS0, One), LEqual (And (FDEV, One), One)), LEqual (And (FDRP, 0x80), 0x80)))
                     {
                         Return (GTF1)
                     }
@@ -14548,27 +14253,23 @@ Return (Package (0x02)
                                 Store (0xEF, CMMD)
                             }
                         }
+                        ElseIf (LEqual (And (W119, 0x20), 0x20))
+                        {
+                            If (LEqual (And (W120, 0x20), Zero))
+                            {
+                                Store (0x41, FEAT)
+                                Store (0xEF, CMMD)
+                            }
+                        }
                         Else
                         {
-                            If (LEqual (And (W119, 0x20), 0x20))
-                            {
-                                If (LEqual (And (W120, 0x20), Zero))
-                                {
-                                    Store (0x41, FEAT)
-                                    Store (0xEF, CMMD)
-                                }
-                            }
-                            Else
-                            {
-                            }
                         }
                     }
                 }
 
                 Method (_GTF, 0, Serialized)  // _GTF: Get Task File
                 {
-                    If (LAnd (LAnd (LEqual (DVS1, One), LEqual (And (FDEV, One), One)), 
-                        LEqual (And (FDRP, 0x80), 0x80)))
+                    If (LAnd (LAnd (LEqual (DVS1, One), LEqual (And (FDEV, One), One)), LEqual (And (FDRP, 0x80), 0x80)))
                     {
                         Name (PIB1, Buffer (0x07)
                         {
@@ -14600,8 +14301,7 @@ Return (Package (0x02)
 
                 Method (_GTF, 0, Serialized)  // _GTF: Get Task File
                 {
-                    If (LAnd (LAnd (LEqual (DVS2, One), LEqual (And (FDEV, One), One)), 
-                        LEqual (And (FDRP, 0x80), 0x80)))
+                    If (LAnd (LAnd (LEqual (DVS2, One), LEqual (And (FDEV, One), One)), LEqual (And (FDRP, 0x80), 0x80)))
                     {
                         Name (PIB1, Buffer (0x07)
                         {
@@ -14633,8 +14333,7 @@ Return (Package (0x02)
 
                 Method (_GTF, 0, Serialized)  // _GTF: Get Task File
                 {
-                    If (LAnd (LAnd (LEqual (DVS3, One), LEqual (And (FDEV, One), One)), 
-                        LEqual (And (FDRP, 0x80), 0x80)))
+                    If (LAnd (LAnd (LEqual (DVS3, One), LEqual (And (FDEV, One), One)), LEqual (And (FDRP, 0x80), 0x80)))
                     {
                         Name (PIB1, Buffer (0x07)
                         {
@@ -15040,10 +14739,10 @@ Return (Package (0x02)
                 Return (BUF2)
             }
 
-//            Method (_SRS, 1, Serialized)  // _SRS: Set Resource Settings
-//            {
-//                Return (BUF2)
-//            }
+            Method (_SRS, 1, Serialized)  // _SRS: Set Resource Settings
+            {
+                Return (BUF2)
+            }
         }
     }
 
@@ -15102,6 +14801,5 @@ Return (Package (0x02)
     Method (WAK, 1, NotSerialized)
     {
     }
-    Store ("arpt3-bcm4352_v3.0 dsdt edits, github.com/toleda", Debug)
 }
 
