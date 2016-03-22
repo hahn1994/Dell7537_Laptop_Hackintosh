@@ -4121,13 +4121,14 @@ DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                     {
                         SX10 ()
                         Store (\_SB.PHS1 (0x1C), Local0)
-                        SX12 ()
+//                        SX12 ()
                         //Note:Can't sleep when lid close
 //                        Return (Local0)
                         \_SB.PCI0.LPCB.EC.PCA1 (0x3C, Zero)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x02), Local0)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x03), Local1)
                         Or (Local0, ShiftLeft (Local1, 0x08), Local0)
+                        SX12 ()// move
                         Return (Local0)
                     }
 
@@ -4767,6 +4768,23 @@ DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                             }
 
                             Return (BST0)
+                        }
+                        
+                        Method(RMCF)
+                        {
+                            Return(Package()
+                            {
+                                    "UseExtendedBatteryInformationMethod", ">y",
+                                    "UseExtraBatteryInformationMethod", ">y",
+                                    "EstimateCycleCountDivisor", 6,
+                                    "UseDesignVoltageForDesignCapacity", ">y",
+                                    "UseDesignVoltageForMaxCapacity", ">y",
+                                    "UseDesignVoltageForCurrentCapacity", ">y",
+                                    "CurrentDischargeRateMax", 20000,
+                                    "CorrectCorruptCapacities", ">y",
+                                    "Correct16bitSignedCurrentRate", ">y",
+                                    "StartupDelay", 0
+                            })
                         }
                     }
                 }

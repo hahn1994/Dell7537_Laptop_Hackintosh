@@ -139,9 +139,9 @@
 
 		Rename GFX0 to IGPU
 
-		7/8-series USB
+		USB3 _PRW(0x6D)
 
-		IRQ Fix
+		7/8-series USB
 
 		SMBUS Fix
 
@@ -151,7 +151,7 @@
 
 		HPET Fix
 
-		OS Check Fix(Windows 7/8)
+		OS Check Fix(Windows 8)
 
 		AC Adapter Fix
 
@@ -167,7 +167,7 @@
 
 		Rename B0D3 to HDAU
 
-		USB3 _PRW(0x6D)
+		IRQ Fix
 
 		Disable/Enable on _WAK/_PTS(DSDT)
 
