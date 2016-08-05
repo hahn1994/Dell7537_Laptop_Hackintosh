@@ -4119,11 +4119,11 @@ DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
 
                     Method (ECG1, 0, NotSerialized)
                     {
-                        SX10 ()
-                        Store (\_SB.PHS1 (0x1C), Local0)
+//                        SX10 ()
+//                        Store (\_SB.PHS1 (0x1C), Local0)
 //                        SX12 ()
-                        //Note:Can't sleep when lid close
 //                        Return (Local0)
+                        SX10 ()
                         \_SB.PCI0.LPCB.EC.PCA1 (0x3C, Zero)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x02), Local0)
                         Store (\_SB.PCI0.LPCB.EC.ECRB (0x03), Local1)
@@ -5673,6 +5673,14 @@ DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
                         EndDependentFn ()
                     })
                 }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    If (LEqual (Arg2, Zero)) { Return (Buffer() { 0x03 } ) }
+                    Return (Package()
+                    {
+                        "compatible", "pci8086,9c43",
+                    })
+                }
             }
             Device (MCHC)
             {
@@ -5867,10 +5875,10 @@ DefinitionBlock ("", "DSDT", 2, "DELL  ", "HSW-LPT", 0x00000000)
 
     Method (_PTS, 1, Serialized)  // _PTS: Prepare To Sleep
     {
-        External(\_SB.PCI0.PEG0.PEGP._ON, MethodObj)
-If (CondRefOf(\_SB.PCI0.PEG0.PEGP._ON)) { \_SB.PCI0.PEG0.PEGP._ON() }
-If (LNotEqual(Arg0,5)) {
-Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+        External(\_SB.PCI0.PEG0.PEGP._OFF, MethodObj)
+        If (CondRefOf(\_SB.PCI0.PEG0.PEGP._OFF)) { \_SB.PCI0.PEG0.PEGP._OFF() }
+        If (LNotEqual(Arg0,5)) {
+        Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
         Store (Zero, P80D)
         P8XH (Zero, Arg0)
         While (One)
@@ -5934,7 +5942,7 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
         }
 
         P8XH (One, Arg0)
-}
+    }
 
     }
 
@@ -8730,6 +8738,8 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 Return (Package()
                 {
                     "AAPL,clock-id", Buffer (One) { 0x01 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
 				   "AAPL,slot-name", "Built In",
 				   "name", "Intel EHCI Controller",
 				   "model", Buffer(0x3E) {"Intel 8 Series Chipset Family USB Enhanced Host Controller #1"},
@@ -9125,6 +9135,8 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 Return (Package()
                 {
                     "AAPL,clock-id", Buffer (One) { 0x01 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
 				   "AAPL,slot-name", "Built In",
 				   "name", "Intel EHCI Controller",
 				   "model", Buffer (0x3E) {"Intel 8 Series Chipset Family USB Enhanced Host Controller #2"},
@@ -10200,6 +10212,8 @@ Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
                 Return (Package()
                 {
                     "AAPL,clock-id", Buffer (One) { 0x02 },
+                    "subsystem-id", Buffer() { 0x70, 0x72, 0x00, 0x00 },
+                    "subsystem-vendor-id", Buffer() { 0x86, 0x80, 0x00, 0x00 },
 				   "AAPL,slot-name", "Built In",
 				   "name", "Intel XHCI Controller",
 				   "model", Buffer (0x37) {"Intel 8 Series Chipset Family USB xHCI Host Controller"},
